@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --aura-bg-void: #FAF8F5;
+    --aura-bg-panel: #FFFFFF;
+    --aura-bg-elevated: #F2EFE9;
+    --aura-gold: #B8860B;
+    --aura-gold-soft: #D4A02A;
+    --aura-copper: #8B5E34;
+    --aura-cream: #1A1A1E;
+    --aura-muted: #66625D;
+    --aura-line: rgba(184, 134, 11, 0.2);
+    --aura-card-border: rgba(184, 134, 11, 0.2);
+  }
+
+  :root.dark {
+    --aura-bg-void: #0A0A0C;
+    --aura-bg-panel: #151517;
+    --aura-bg-elevated: #1D1D20;
+    --aura-gold: #D4A02A;
+    --aura-gold-soft: #E8C168;
+    --aura-copper: #8B5E34;
+    --aura-cream: #F5F1E8;
+    --aura-muted: #9C9894;
+    --aura-line: rgba(212, 160, 42, 0.14);
+    --aura-card-border: rgba(212, 160, 42, 0.15);
+  }
+
+  body {
+    background-color: var(--aura-bg-void);
+    color: var(--aura-cream);
+    font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  h1, h2, h3, h4, .font-serif-display {
+    font-family: var(--font-playfair), Georgia, serif;
+  }
+}
+
+/* Custom Utilities for Aura Theme */
+.bg-aura-void { background-color: var(--aura-bg-void); }
+.bg-aura-panel { background-color: var(--aura-bg-panel); }
+.bg-aura-elevated { background-color: var(--aura-bg-elevated); }
+.text-aura-gold { color: var(--aura-gold); }
+.text-aura-gold-soft { color: var(--aura-gold-soft); }
+.text-aura-copper { color: var(--aura-copper); }
+.text-aura-cream { color: var(--aura-cream); }
+.text-aura-muted { color: var(--aura-muted); }
+.border-aura-line { border-color: var(--aura-line); }
+
+.glow-amber-sm {
+  box-shadow: 0 0 15px rgba(212, 160, 42, 0.15);
+}
+.glow-amber-md {
+  box-shadow: 0 0 30px rgba(212, 160, 42, 0.25);
+}
+.glow-amber-lg {
+  box-shadow: 0 0 50px rgba(212, 160, 42, 0.35);
+}
+
+.text-gradient-amber {
+  background: linear-gradient(135deg, var(--aura-cream) 0%, var(--aura-gold-soft) 50%, var(--aura-gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hairline-border {
+  border: 1px solid var(--aura-line);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--aura-bg-void);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--aura-bg-elevated);
+  border: 1px solid var(--aura-line);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--aura-gold);
+}
+
+/* Glassmorphism */
+.glass-panel {
+  background: var(--aura-bg-panel);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--aura-line);
+}
