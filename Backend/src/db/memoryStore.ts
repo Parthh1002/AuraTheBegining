@@ -694,9 +694,9 @@ export const memoryStore = {
       ],
     },
   ],
-  gallery: [],
-  testimonials: [],
-  enquiries: [],
+  gallery: [] as any[],
+  testimonials: [] as any[],
+  enquiries: [] as any[],
   settings: {
     id: 1,
     store_phone: '+91 98765 43210',
