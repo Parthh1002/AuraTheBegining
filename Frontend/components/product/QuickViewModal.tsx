@@ -132,8 +132,8 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-aura-void/90 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto animate-fadeIn">
-      <div className="w-full max-w-4xl bg-aura-panel border border-aura-line rounded-2xl overflow-hidden shadow-2xl relative my-8 max-h-[90vh] flex flex-col md:flex-row">
+    <div className="fixed inset-0 z-50 bg-aura-void/90 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto transition-opacity duration-300">
+      <div className="w-full max-w-4xl bg-aura-panel border border-aura-line rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.6)] relative my-8 max-h-[90vh] flex flex-col md:flex-row animate-premium-popup">
         {/* Close Button */}
         <button
           onClick={onClose}

@@ -45,7 +45,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable} dark`}>
+    <html lang="en" className={`${playfair.variable} ${inter.variable}`} suppressHydrationWarning>
       <body className="bg-aura-void text-aura-cream antialiased selection:bg-aura-gold selection:text-[#0A0A0C]">
         <LenisProvider>
           {/* Signature First-Load Intro Animation */}

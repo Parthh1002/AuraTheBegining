@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, SlidersHorizontal, Sparkles, Search, X } from 'lucide-react';
+import ScrollReveal from '@/components/animation/ScrollReveal';
 import EmptyState from '@/components/ui/EmptyState';
 
 interface Collection {
@@ -91,7 +92,7 @@ export default function CollectionsClient({
   }, [collections]);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 space-y-10">
+    <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-16 py-10 sm:py-14 space-y-10">
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto space-y-4">
         <div className="inline-flex items-center gap-2 bg-aura-elevated/60 backdrop-blur-sm border border-aura-line px-4 py-1.5 rounded-full">
@@ -210,44 +211,43 @@ export default function CollectionsClient({
           {filteredCollections.map((col, idx) => {
             const productCount = col.product_count || 0;
             return (
-              <Link
-                key={col.id}
-                href={`/collections/${col.slug}`}
-                className="group relative bg-aura-panel border border-aura-line hover:border-aura-gold rounded-2xl overflow-hidden shadow-xl transition-all duration-500 flex flex-col justify-between hover:shadow-aura-gold/10 hover:shadow-2xl hover:-translate-y-1"
-                style={{ animationDelay: `${idx * 80}ms` }}
-              >
-                {/* Image */}
-                <div className="relative w-full aspect-[4/3] bg-aura-elevated overflow-hidden">
-                  <Image
-                    src={
-                      col.cover_image_url ||
-                      'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=80&w=800&auto=format&fit=crop'
-                    }
-                    alt={col.name}
-                    fill
-                    className="object-cover object-center group-hover:scale-110 transition-transform duration-700 filter brightness-[0.85]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-aura-panel via-transparent to-transparent opacity-80" />
+              <ScrollReveal key={col.id} direction="up" delay={idx * 0.1}>
+                <Link
+                  href={`/collections/${col.slug}`}
+                  className="group relative bg-aura-panel border border-aura-line hover:border-aura-gold rounded-2xl overflow-hidden shadow-xl transition-all duration-500 flex flex-col justify-between hover:shadow-aura-gold/10 hover:shadow-2xl hover:-translate-y-1 block h-full"
+                >
+                  {/* Image */}
+                  <div className="relative w-full aspect-[4/3] bg-aura-elevated overflow-hidden">
+                    <Image
+                      src={
+                        col.cover_image_url ||
+                        'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=80&w=800&auto=format&fit=crop'
+                      }
+                      alt={col.name}
+                      fill
+                      className="object-cover object-center group-hover:scale-110 transition-transform duration-700 filter brightness-[0.85]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-aura-panel via-transparent to-transparent opacity-80" />
 
-                  {/* Badges Row */}
-                  <div className="absolute top-4 right-4 flex items-center gap-2">
-                    {col.is_featured && (
-                      <span className="bg-aura-gold/90 backdrop-blur-sm text-[#0A0A0C] text-[10px] font-bold tracking-widest px-2.5 py-1 rounded-full uppercase shadow-md">
-                        Featured
+                    {/* Badges Row */}
+                    <div className="absolute top-4 right-4 flex items-center gap-2">
+                      {col.is_featured && (
+                        <span className="bg-aura-gold/90 backdrop-blur-sm text-[#0A0A0C] text-[10px] font-bold tracking-widest px-2.5 py-1 rounded-full uppercase shadow-md">
+                          Featured
+                        </span>
+                      )}
+                      <span className="bg-aura-void/80 backdrop-blur-sm text-aura-gold border border-aura-line text-[10px] font-bold tracking-widest px-2.5 py-1 rounded-full uppercase shadow-sm">
+                        {productCount} {productCount === 1 ? 'Design' : 'Designs'}
                       </span>
-                    )}
-                    <span className="bg-aura-void/80 backdrop-blur-sm text-aura-gold border border-aura-line text-[10px] font-bold tracking-widest px-2.5 py-1 rounded-full uppercase shadow-sm">
-                      {productCount} {productCount === 1 ? 'Design' : 'Designs'}
-                    </span>
-                  </div>
+                    </div>
 
-                  {/* Category Tag */}
-                  <div className="absolute bottom-4 left-4">
-                    <span className="bg-aura-void/70 backdrop-blur-md text-aura-cream/80 text-[10px] font-bold tracking-widest px-3 py-1 rounded-full uppercase border border-aura-line/40">
-                      {col.tag_category || 'collection'}
-                    </span>
+                    {/* Category Tag */}
+                    <div className="absolute bottom-4 left-4">
+                      <span className="bg-aura-void/70 backdrop-blur-md text-aura-cream/80 text-[10px] font-bold tracking-widest px-3 py-1 rounded-full uppercase border border-aura-line/40">
+                        {col.tag_category || 'collection'}
+                      </span>
+                    </div>
                   </div>
-                </div>
 
                 {/* Content */}
                 <div className="p-5 sm:p-6 space-y-2 flex-1">
@@ -271,6 +271,7 @@ export default function CollectionsClient({
                   </div>
                 </div>
               </Link>
+            </ScrollReveal>
             );
           })}
         </div>

@@ -1,6 +1,42 @@
 'use client';
 
-export default function AuraLogoMark({ className = 'w-10 h-10' }: { className?: string }) {
+import { useEffect, useState } from 'react';
+
+type LogoVariant = 'light' | 'dark' | 'auto';
+
+export default function AuraLogoMark({ 
+  className = 'w-10 h-10',
+  variant = 'auto'
+}: { 
+  className?: string;
+  variant?: LogoVariant;
+}) {
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
+
+  useEffect(() => {
+    if (variant !== 'auto') return;
+    setIsDarkTheme(document.documentElement.classList.contains('dark'));
+
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          setIsDarkTheme(document.documentElement.classList.contains('dark'));
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, { attributes: true });
+    return () => observer.disconnect();
+  }, [variant]);
+
+  const resolvedVariant = variant === 'auto' ? (isDarkTheme ? 'dark' : 'light') : variant;
+  const isDark = resolvedVariant === 'dark';
+
+  /* color tokens */
+  const ringColor  = isDark ? 'rgba(212,160,42,0.55)' : 'rgba(27,26,24,0.35)';
+  const goldRing   = '#D4A02A';
+  const monogram   = isDark ? '#D4A02A' : '#1B1A18';
+
   return (
     <svg
       viewBox="0 0 100 100"
@@ -9,60 +45,22 @@ export default function AuraLogoMark({ className = 'w-10 h-10' }: { className?: 
       className={className}
       aria-label="AURA Logo Emblem"
     >
-      <defs>
-        <radialGradient id="auraGoldGrad" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#F3E5AB" />
-          <stop offset="50%" stopColor="#D4A02A" />
-          <stop offset="100%" stopColor="#8B5E34" />
-        </radialGradient>
+      {/* NO white rect — fully transparent bg so it blends with any surface */}
 
-        <linearGradient id="auraGoldLinear" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#E8C168" />
-          <stop offset="50%" stopColor="#D4A02A" />
-          <stop offset="100%" stopColor="#996E1E" />
-        </linearGradient>
-      </defs>
+      {/* Outer Ring */}
+      <circle cx="50" cy="50" r="46" stroke={ringColor}  strokeWidth="0.8" />
 
-      {/* Radiant Sunburst Rays */}
-      <g stroke="url(#auraGoldGrad)" strokeWidth="1.5" opacity="0.85" strokeLinecap="round">
-        <line x1="50" y1="6" x2="50" y2="14" />
-        <line x1="50" y1="86" x2="50" y2="94" />
-        <line x1="6" y1="50" x2="14" y2="50" />
-        <line x1="86" y1="50" x2="94" y2="50" />
-        <line x1="19" y1="19" x2="25" y2="25" />
-        <line x1="75" y1="75" x2="81" y2="81" />
-        <line x1="19" y1="81" x2="25" y2="75" />
-        <line x1="75" y1="25" x2="81" y2="19" />
-      </g>
+      {/* Mid Ring */}
+      <circle cx="50" cy="50" r="36" stroke={ringColor}  strokeWidth="0.7" />
 
-      {/* Outer Crest Ring */}
-      <circle
-        cx="50"
-        cy="50"
-        r="34"
-        stroke="url(#auraGoldLinear)"
-        strokeWidth="2.5"
-      />
+      {/* Inner Gold Ring — always gold */}
+      <circle cx="50" cy="50" r="26" stroke={goldRing}   strokeWidth="1.4" />
 
-      {/* Inner Dotted Accent Ring */}
-      <circle
-        cx="50"
-        cy="50"
-        r="28"
-        stroke="#D4A02A"
-        strokeWidth="1"
-        strokeDasharray="2 4"
-        opacity="0.7"
-      />
-
-      {/* Stylized Apex Monogram 'A' */}
+      {/* Monogram A — clean geometric */}
       <path
-        d="M 50 24 L 33 68 H 41 L 45 56 H 55 L 59 68 H 67 L 50 24 Z M 48 48 L 50 40 L 52 48 H 48 Z"
-        fill="url(#auraGoldLinear)"
+        d="M50 34 L40 66 H44.5 L47 59 H53 L55.5 66 H60 L50 34 Z M48.2 55 L50 48.5 L51.8 55 H48.2 Z"
+        fill={monogram}
       />
-
-      {/* Radiant Apex Diamond Star */}
-      <polygon points="50,15 52.5,20 57.5,20 53.5,23 55,28 50,25 45,28 46.5,23 42.5,20 47.5,20" fill="#F5F1E8" />
     </svg>
   );
 }

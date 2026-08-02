@@ -2,252 +2,365 @@
 
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import AuraLogoMark from '@/components/ui/AuraLogoMark';
+import AuraParticles from './AuraParticles';
 
 export default function IntroOverlay() {
-  const [showOverlay, setShowOverlay] = useState<boolean>(true);
-  const [showSkip, setShowSkip] = useState<boolean>(false);
+  const [showOverlay, setShowOverlay] = useState(true);
+  const [showSkip,    setShowSkip]    = useState(false);
+  const [mounted,     setMounted]     = useState(false);
 
-  const containerRef = useRef<HTMLDivElement>(null);
-  const logoWrapperRef = useRef<HTMLDivElement>(null);
-  const auraGlowRef = useRef<HTMLDivElement>(null);
-  const auraRingRef = useRef<HTMLDivElement>(null);
-  const wordmarkRef = useRef<HTMLHeadingElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const taglineRef = useRef<HTMLParagraphElement>(null);
-  const locationTagRef = useRef<HTMLParagraphElement>(null);
-  const goldLineRef = useRef<HTMLDivElement>(null);
-  const progressBarRef = useRef<HTMLDivElement>(null);
-  const timelineRef = useRef<gsap.core.Timeline | null>(null);
+  /* ── refs ───────────────────────────────────────── */
+  const containerRef  = useRef<HTMLDivElement>(null);
+  const contentRef    = useRef<HTMLDivElement>(null);
+  const ring1Ref      = useRef<HTMLDivElement>(null);
+  const ring2Ref      = useRef<HTMLDivElement>(null);
+  const ring3Ref      = useRef<HTMLDivElement>(null);
+  const centerARef    = useRef<HTMLSpanElement>(null);
+  const dividerRef    = useRef<HTMLDivElement>(null);
+  const wordmarkRef   = useRef<HTMLHeadingElement>(null);
+  const taglineRef    = useRef<HTMLParagraphElement>(null);
+  const subtitleRef   = useRef<HTMLParagraphElement>(null);
+  const panelLeftRef  = useRef<HTMLDivElement>(null);
+  const panelRightRef = useRef<HTMLDivElement>(null);
+  const seamRef       = useRef<HTMLDivElement>(null);
+  const tlRef         = useRef<gsap.core.Timeline | null>(null);
 
-  useEffect(() => {
-    // 1. Check prefers-reduced-motion
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-      setShowOverlay(false);
-      return;
-    }
+  /* ── destroy ─────────────────────────────────────── */
+  const destroyIntro = () => {
+    document.body.style.overflow = '';
+    setShowOverlay(false);
+  };
 
-    // 2. Show Skip button after 300ms
-    const skipTimer = setTimeout(() => {
-      setShowSkip(true);
-    }, 300);
-
-    // 3. Build 60FPS Hardware-Accelerated GSAP Timeline (~3.6s Duration)
-    const tl = gsap.timeline({
-      onComplete: () => {
-        finishIntro();
-      },
+  /* ── skip → compressed parting (always premium) ─── */
+  const triggerPart = (dur = 0.55) => {
+    const pL = panelLeftRef.current;
+    const pR = panelRightRef.current;
+    if (!pL || !pR) { destroyIntro(); return; }
+    if (contentRef.current) gsap.set(contentRef.current, { opacity: 0 });
+    if (seamRef.current)    gsap.set(seamRef.current,    { opacity: 0 });
+    gsap.to([pL, pR], {
+      duration: dur,
+      ease: 'power3.inOut',
+      x: (i: number) => (i === 0 ? '-100%' : '100%'),
+      onComplete: destroyIntro,
     });
-    timelineRef.current = tl;
-
-    // Initial hardware-accelerated transforms
-    gsap.set(logoWrapperRef.current, {
-      scale: 0.2,
-      opacity: 0,
-      force3D: true,
-      transformOrigin: '50% 50%',
-    });
-    gsap.set(auraGlowRef.current, { scale: 0.1, opacity: 0, force3D: true });
-    gsap.set(auraRingRef.current, { scale: 0.2, opacity: 0, force3D: true });
-    gsap.set(subtitleRef.current, { opacity: 0, y: 15, force3D: true });
-    gsap.set(wordmarkRef.current, {
-      opacity: 0,
-      y: 30,
-      scale: 0.9,
-      force3D: true,
-      transformOrigin: '50% 50%',
-    });
-    gsap.set(goldLineRef.current, { width: 0, opacity: 0 });
-    gsap.set(taglineRef.current, { opacity: 0, y: -10, force3D: true });
-    gsap.set(locationTagRef.current, { opacity: 0, y: 8, force3D: true });
-    gsap.set(progressBarRef.current, { width: '0%' });
-
-    // PHASE 1 (0.0s - 1.2s): Smooth Logo & Radial Glow Rise
-    tl.to(auraGlowRef.current, {
-      scale: 6,
-      opacity: 0.85,
-      duration: 1.0,
-      ease: 'power2.out',
-    })
-    .to(logoWrapperRef.current, {
-      scale: 1.2,
-      opacity: 1,
-      duration: 1.0,
-      ease: 'back.out(1.5)',
-    }, '-=1.0')
-    .to(logoWrapperRef.current, {
-      scale: 1.0,
-      duration: 0.3,
-      ease: 'power1.inOut',
-    }, '-=0.2')
-
-    // PHASE 2 (1.2s - 2.6s): Typography & Gold Line Reveal
-    .to(subtitleRef.current, {
-      opacity: 1,
-      y: 0,
-      duration: 0.4,
-      ease: 'power2.out',
-    }, '-=0.2')
-    .to(wordmarkRef.current, {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      duration: 0.6,
-      ease: 'power3.out',
-    }, '-=0.3')
-    .to(goldLineRef.current, {
-      width: '140px',
-      opacity: 1,
-      duration: 0.4,
-      ease: 'power2.inOut',
-    }, '-=0.4')
-    .to(taglineRef.current, {
-      opacity: 1,
-      y: 0,
-      duration: 0.4,
-      ease: 'power2.out',
-    }, '-=0.3')
-    .to(locationTagRef.current, {
-      opacity: 0.85,
-      y: 0,
-      duration: 0.3,
-      ease: 'power2.out',
-    }, '-=0.2')
-
-    // PHASE 3 (2.6s - 3.2s): Aura Wave & Bottom Progress
-    .to(auraRingRef.current, {
-      scale: 3.5,
-      opacity: 0.8,
-      duration: 0.6,
-      ease: 'power2.out',
-    }, '-=0.5')
-    .to(progressBarRef.current, {
-      width: '100%',
-      duration: 3.2,
-      ease: 'linear',
-    }, 0)
-
-    // PHASE 4 (3.2s - 3.6s): Smooth Crossfade Dissolve
-    .to(containerRef.current, {
-      opacity: 0,
-      duration: 0.4,
-      ease: 'power2.inOut',
-    }, '-=0.1');
-
-    return () => {
-      clearTimeout(skipTimer);
-      if (tl) tl.kill();
-    };
-  }, []);
-
-  const finishIntro = () => {
-    if (containerRef.current) {
-      gsap.to(containerRef.current, {
-        opacity: 0,
-        duration: 0.3,
-        ease: 'power2.inOut',
-        onComplete: () => setShowOverlay(false),
-      });
-    } else {
-      setShowOverlay(false);
-    }
   };
 
   const handleSkip = () => {
-    if (timelineRef.current) {
-      timelineRef.current.kill();
-    }
-    finishIntro();
+    tlRef.current?.kill();
+    triggerPart(0.5);
   };
 
-  if (!showOverlay) return null;
+  /* ── Effect 1: mount flag ─────────────────────── */
+  useEffect(() => { setMounted(true); }, []);
+
+  /* ── Effect 2: GSAP (runs after DOM is ready) ── */
+  useEffect(() => {
+    if (!mounted) return;
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.body.style.overflow = 'hidden';
+
+    if (prefersReduced) {
+      const t = gsap.timeline({ onComplete: destroyIntro });
+      t.to(containerRef.current, { opacity: 0, duration: 0.3, delay: 1.5 });
+      tlRef.current = t;
+      return () => { t.kill(); document.body.style.overflow = ''; };
+    }
+
+    const ctx = gsap.context(() => {
+      /* ─── initial hidden states ─────────────── */
+      gsap.set([ring1Ref.current, ring2Ref.current, ring3Ref.current],
+        { scale: 0, opacity: 0, rotation: -180 });
+      gsap.set(centerARef.current,  { scale: 0, opacity: 0 });
+      gsap.set('.intro-letter',     { opacity: 0, y: 50, skewY: 6 });
+      gsap.set(dividerRef.current,  { scaleX: 0, opacity: 0 });
+      gsap.set(taglineRef.current,  { opacity: 0, y: 14, letterSpacing: '0.1em' });
+      gsap.set(subtitleRef.current, { opacity: 0, y: 10 });
+      gsap.set(panelLeftRef.current,  { x: '0%' });
+      gsap.set(panelRightRef.current, { x: '0%' });
+      gsap.set(seamRef.current,       { opacity: 0, scaleY: 0 });
+
+      const tl = gsap.timeline();
+      tlRef.current = tl;
+
+      tl.call(() => setShowSkip(true), [], 0.35);
+
+      /* ── RING 1 outer ── 0.1s */
+      tl.to(ring1Ref.current, {
+        scale: 1, opacity: 1, rotation: 0,
+        duration: 0.65, ease: 'back.out(1.8)',
+      }, 0.1);
+
+      /* ── RING 2 middle ── 0.3s */
+      tl.to(ring2Ref.current, {
+        scale: 1, opacity: 1, rotation: 0,
+        duration: 0.6, ease: 'back.out(2)',
+      }, 0.3);
+
+      /* ── RING 3 gold ── 0.55s */
+      tl.to(ring3Ref.current, {
+        scale: 1, opacity: 1, rotation: 0,
+        duration: 0.55, ease: 'back.out(2.5)',
+      }, 0.55);
+
+      /* ── CENTER "A" ── 0.85s */
+      tl.to(centerARef.current, {
+        scale: 1, opacity: 1,
+        duration: 0.4, ease: 'back.out(3)',
+      }, 0.85);
+
+      /* ── GOLD RING GLOW (infinite until parting) ── */
+      tl.to(ring3Ref.current, {
+        boxShadow: '0 0 28px rgba(212,160,42,0.9), inset 0 0 14px rgba(212,160,42,0.45)',
+        duration: 0.9, ease: 'sine.inOut', yoyo: true, repeat: -1,
+      }, 1.0);
+
+      /* ── A-U-R-A letters stagger ── 1.05s */
+      tl.to('.intro-letter', {
+        opacity: 1, y: 0, skewY: 0,
+        duration: 0.6, stagger: 0.1, ease: 'expo.out',
+      }, 1.05);
+
+      /* ── GOLD DIVIDER draws ── 1.6s */
+      tl.to(dividerRef.current, {
+        scaleX: 1, opacity: 1,
+        duration: 0.4, ease: 'power3.out',
+      }, 1.6);
+
+      /* ── "THE BEGINNING" tracks out ── 1.8s */
+      tl.to(taglineRef.current, {
+        opacity: 1, y: 0, letterSpacing: '0.38em',
+        duration: 0.65, ease: 'power3.out',
+      }, 1.8);
+
+      /* ── Subtitle ── 2.1s */
+      tl.to(subtitleRef.current, {
+        opacity: 1, y: 0,
+        duration: 0.5, ease: 'power2.out',
+      }, 2.1);
+
+      /* ── Medallion gentle float ── */
+      tl.to('.intro-medallion', {
+        y: -10, duration: 1.0, ease: 'sine.inOut', yoyo: true, repeat: -1,
+      }, 1.9);
+
+      /* ════════════════════════════════════════
+         "PARTING OF LIGHT" — starts at 2.5s
+         Total target finish ≈ 4.0s
+         ════════════════════════════════════════ */
+
+      /* A — content fades (0.35s) → done at 2.85s */
+      tl.to(contentRef.current, {
+        opacity: 0, duration: 0.35, ease: 'power2.in',
+      }, 2.5);
+
+      /* B — seam-light appears (0.3s) → at 2.85s */
+      tl.to(seamRef.current, {
+        opacity: 1, scaleY: 1, duration: 0.3, ease: 'power2.out',
+      }, 2.8);
+
+      /* C — seam intensifies briefly (0.2s) → at 3.05s */
+      tl.to(seamRef.current, {
+        filter: 'blur(3px) brightness(1.8)',
+        duration: 0.2, ease: 'sine.in',
+      }, 3.05);
+
+      /* D — PANELS PART (0.7s, power4.out) → done at 3.95s */
+      tl.to(panelLeftRef.current, {
+        x: '-100%', duration: 0.7, ease: 'power4.out', willChange: 'transform',
+      }, 3.25);
+      tl.to(panelRightRef.current, {
+        x: '100%', duration: 0.7, ease: 'power4.out', willChange: 'transform',
+      }, 3.25);
+
+      /* E — seam bleeds out as gap opens */
+      tl.to(seamRef.current, {
+        opacity: 0, scaleX: 10, filter: 'blur(24px)',
+        duration: 0.65, ease: 'power3.out',
+      }, 3.3);
+
+      /* F — destroy overlay at 4.0s exactly */
+      tl.call(destroyIntro, [], 4.0);
+
+    }, containerRef);
+
+    return () => { ctx.revert(); document.body.style.overflow = ''; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mounted]);
+
+  if (!showOverlay || !mounted) return null;
 
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#070709] overflow-hidden pointer-events-auto select-none will-change-transform"
+      className="fixed inset-0 z-[999] overflow-hidden pointer-events-auto"
+      /* void-black background — content is white+gold on dark */
+      style={{ background: '#0A0A0C' }}
       aria-label="AURA Introduction"
     >
-      {/* Background Radial Glow */}
+      {/* ── LEFT PANEL ── */}
       <div
-        ref={auraGlowRef}
-        className="absolute w-36 h-36 rounded-full pointer-events-none z-0"
+        ref={panelLeftRef}
+        className="absolute top-0 left-0 h-full will-change-transform"
+        style={{ width: '50vw', background: '#0A0A0C', zIndex: 20 }}
+      />
+
+      {/* ── RIGHT PANEL ── */}
+      <div
+        ref={panelRightRef}
+        className="absolute top-0 right-0 h-full will-change-transform"
+        style={{ width: '50vw', background: '#0A0A0C', zIndex: 20 }}
+      />
+
+      {/* ── GOLD SEAM LIGHT ── */}
+      <div
+        ref={seamRef}
+        className="absolute top-0 left-1/2 -translate-x-1/2 h-full origin-center"
         style={{
-          background: 'radial-gradient(circle, rgba(212,160,42,0.85) 0%, rgba(232,193,104,0.4) 40%, transparent 75%)',
+          width: 2,
+          zIndex: 30,
+          background: 'linear-gradient(180deg, transparent 0%, #D4A02A 30%, #D4A02A 70%, transparent 100%)',
+          filter: 'blur(1px)',
+          boxShadow: '0 0 20px 8px rgba(212,160,42,0.6)',
         }}
       />
 
-      {/* Expanding Ring */}
+      {/* ── INTRO CONTENT ── sits above panels, below seam */}
       <div
-        ref={auraRingRef}
-        className="absolute w-44 h-44 rounded-full pointer-events-none border-2 border-[#D4A02A]/70 z-0"
-        style={{
-          boxShadow: '0 0 40px rgba(212,160,42,0.5)',
-        }}
-      />
+        ref={contentRef}
+        className="absolute inset-0 flex flex-col items-center justify-center"
+        style={{ zIndex: 25 }}
+      >
+        {/* Subtle gold radial glow on dark bg */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'radial-gradient(ellipse 55% 50% at 50% 50%, rgba(212,160,42,0.09) 0%, transparent 70%)',
+          }}
+        />
 
-      {/* Container - Fully Mobile Responsive */}
-      <div className="relative z-10 text-center px-4 flex flex-col items-center justify-center max-w-md sm:max-w-xl w-full space-y-3">
-        {/* Animated Gold Logo Mark */}
-        <div ref={logoWrapperRef} className="relative z-20 mb-1">
-          <AuraLogoMark className="w-20 h-20 sm:w-28 sm:h-28 drop-shadow-[0_0_25px_rgba(212,160,42,0.9)]" />
-        </div>
+        {/* Ambient signature particles inside the glow */}
+        <AuraParticles variant="intro" />
 
-        {/* Subtitle */}
-        <p
-          ref={subtitleRef}
-          className="font-sans text-[9px] sm:text-xs tracking-[0.35em] sm:tracking-[0.45em] text-[#E8C168] uppercase font-bold"
-        >
-          LIGHT EMERGING FROM DARKNESS
-        </p>
+        <div className="relative flex flex-col items-center text-center select-none">
 
-        {/* Brand Name "AURA" */}
-        <div className="py-1">
+          {/* ── MEDALLION ── */}
+          <div
+            className="intro-medallion relative mb-9 flex items-center justify-center"
+            style={{ width: 200, height: 200 }}
+          >
+            {/* Outer ring — white hairline */}
+            <div
+              ref={ring1Ref}
+              className="absolute rounded-full"
+              style={{ width: 200, height: 200, border: '1px solid rgba(255,255,255,0.28)' }}
+            />
+
+            {/* Middle ring — white hairline */}
+            <div
+              ref={ring2Ref}
+              className="absolute rounded-full"
+              style={{ width: 154, height: 154, border: '1px solid rgba(255,255,255,0.20)' }}
+            />
+
+            {/* Inner gold ring */}
+            <div
+              ref={ring3Ref}
+              className="absolute rounded-full"
+              style={{ width: 110, height: 110, border: '2px solid #D4A02A' }}
+            />
+
+            {/* Center "A" — gold */}
+            <div
+              className="relative z-10 flex items-center justify-center"
+              style={{ width: 90, height: 90 }}
+            >
+              <span
+                ref={centerARef}
+                className="font-serif font-bold"
+                style={{
+                  fontSize: 46,
+                  lineHeight: 1,
+                  letterSpacing: '-0.02em',
+                  color: '#D4A02A',
+                }}
+              >
+                A
+              </span>
+            </div>
+          </div>
+
+          {/* ── AURA WORDMARK — white ── */}
           <h1
             ref={wordmarkRef}
-            className="font-serif text-5xl sm:text-7xl md:text-8xl font-bold text-[#F5F1E8] uppercase tracking-[0.3em] sm:tracking-[0.4em] drop-shadow-[0_0_30px_rgba(212,160,42,0.7)]"
+            className="font-serif font-bold uppercase flex items-center"
+            style={{
+              fontSize: 'clamp(52px, 10vw, 88px)',
+              letterSpacing: '0.22em',
+              lineHeight: 1,
+              color: '#FFFFFF',
+            }}
           >
-            AURA
+            <span className="intro-letter inline-block">A</span>
+            <span className="intro-letter inline-block">U</span>
+            <span className="intro-letter inline-block">R</span>
+            <span className="intro-letter inline-block">A</span>
           </h1>
+
+          {/* ── GOLD DIVIDER ── */}
+          <div
+            ref={dividerRef}
+            className="origin-center mt-5 mb-5"
+            style={{
+              width: 110,
+              height: 1,
+              background: 'linear-gradient(90deg, transparent, #D4A02A, transparent)',
+            }}
+          />
+
+          {/* ── "THE BEGINNING" — gold ── */}
+          <p
+            ref={taglineRef}
+            className="font-sans font-black uppercase"
+            style={{ fontSize: 11, letterSpacing: '0.1em', color: '#D4A02A' }}
+          >
+            THE BEGINNING
+          </p>
+
+          {/* ── SUBTITLE — white/50% ── */}
+          <p
+            ref={subtitleRef}
+            className="font-sans uppercase mt-2"
+            style={{
+              fontSize: 10,
+              letterSpacing: '0.38em',
+              fontWeight: 500,
+              color: 'rgba(255,255,255,0.45)',
+            }}
+          >
+            GIDC DAHEGAM · BOUTIQUE SHOWROOM
+          </p>
         </div>
-
-        {/* Gold Separator Line */}
-        <div
-          ref={goldLineRef}
-          className="h-[2px] bg-gradient-to-r from-transparent via-[#D4A02A] to-transparent my-1 shadow-[0_0_10px_#D4A02A]"
-        />
-
-        {/* Tagline */}
-        <p
-          ref={taglineRef}
-          className="font-sans text-[11px] sm:text-sm tracking-[0.35em] sm:tracking-[0.5em] text-[#D4A02A] uppercase font-extrabold"
-        >
-          THE BEGINNING • MENS WEAR
-        </p>
-
-        {/* Store Location */}
-        <p
-          ref={locationTagRef}
-          className="font-sans text-[9px] sm:text-[10px] tracking-[0.25em] sm:tracking-[0.35em] text-[#9C9894] uppercase font-medium"
-        >
-          GIDC DAHEGAM • BOUTIQUE SHOWROOM
-        </p>
       </div>
 
-      {/* Bottom Gold Progress Bar */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#151517] z-20">
-        <div
-          ref={progressBarRef}
-          className="h-full bg-gradient-to-r from-[#8B5E34] via-[#D4A02A] to-[#F5F1E8] shadow-[0_0_10px_rgba(212,160,42,0.8)]"
-        />
-      </div>
-
-      {/* Skip Button */}
+      {/* ── SKIP BUTTON ── */}
       {showSkip && (
         <button
           onClick={handleSkip}
-          className="absolute top-6 right-6 sm:top-8 sm:right-8 z-30 text-[10px] sm:text-[11px] font-bold tracking-[0.2em] text-[#E8C168] hover:text-white uppercase border border-[#D4A02A]/40 px-4 py-2 rounded-full transition-all bg-[#151517]/80 backdrop-blur-md cursor-pointer hover:bg-[#D4A02A] hover:text-[#0A0A0C]"
+          className="absolute top-6 right-6 z-40 text-[10px] font-bold tracking-[0.25em] uppercase border px-4 py-1.5 rounded-full transition-all duration-200 cursor-pointer"
+          style={{
+            color: 'rgba(255,255,255,0.5)',
+            borderColor: 'rgba(255,255,255,0.2)',
+          }}
+          onMouseEnter={e => {
+            (e.currentTarget as HTMLElement).style.color = '#D4A02A';
+            (e.currentTarget as HTMLElement).style.borderColor = '#D4A02A';
+          }}
+          onMouseLeave={e => {
+            (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.5)';
+            (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.2)';
+          }}
         >
           SKIP
         </button>

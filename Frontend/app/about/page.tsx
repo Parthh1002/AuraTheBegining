@@ -130,7 +130,7 @@ export default async function AboutPage() {
       </section>
 
       {/* 2. BRAND NARRATIVE & CRAFTSMANSHIP */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <span className="text-xs font-sans tracking-[0.3em] text-aura-gold uppercase font-bold">OUR HERITAGE</span>
@@ -170,7 +170,7 @@ export default async function AboutPage() {
       </section>
 
       {/* 3. BRAND VIDEO ADVERTISEMENT & FILM SECTION */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-16">
         <div className="bg-aura-panel border border-aura-line rounded-2xl p-6 sm:p-10 space-y-6 shadow-2xl relative overflow-hidden">
           <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-aura-line pb-6">
             <div>
@@ -208,7 +208,7 @@ export default async function AboutPage() {
       </section>
 
       {/* 4. REAL-TIME INSTAGRAM FEED & REELS SECTION */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-16">
         <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-aura-line pb-6 mb-8">
           <div>
             <div className="inline-flex items-center gap-2 text-xs font-sans tracking-[0.3em] text-aura-gold uppercase font-bold">
@@ -269,7 +269,7 @@ export default async function AboutPage() {
       </section>
 
       {/* 5. BOUTIQUE SHOWROOM GALLERY & SHOP PHOTOS */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-16">
         <div className="text-center max-w-xl mx-auto mb-12 space-y-2">
           <span className="text-xs font-sans tracking-[0.3em] text-aura-gold uppercase font-bold">PHYSICAL STORE GALLERY</span>
           <h2 className="font-serif text-3xl font-bold text-aura-cream">Our Dahegam Boutique Showroom</h2>
@@ -297,7 +297,7 @@ export default async function AboutPage() {
       </section>
 
       {/* 6. FOUNDER DETAILS & LOCATION INFO CARD */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-16">
         <div className="bg-aura-panel border border-aura-line rounded-2xl p-8 sm:p-12 shadow-2xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <div className="space-y-4">
             <span className="text-xs font-sans tracking-[0.3em] text-aura-gold uppercase font-bold">FOUNDER & MASTER ARTISANS</span>

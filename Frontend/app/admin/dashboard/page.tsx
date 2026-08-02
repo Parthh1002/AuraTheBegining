@@ -5,7 +5,7 @@ export const revalidate = 0;
 
 export default function AdminDashboardLayout() {
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-aura-void text-aura-cream transition-colors">
+    <div className="flex flex-col md:flex-row min-h-screen bg-aura-bg text-aura-ink transition-colors">
       <AdminSidebar />
       <main className="flex-1 p-4 sm:p-8 overflow-y-auto">
         <DashboardClient />

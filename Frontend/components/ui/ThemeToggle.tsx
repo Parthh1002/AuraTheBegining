@@ -1,65 +1,99 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Sun, Moon } from 'lucide-react';
+import gsap from 'gsap';
 
 export default function ThemeToggle() {
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const iconRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setMounted(true);
     const savedTheme = localStorage.getItem('aura-theme');
+    let darkState = false;
+
     if (savedTheme) {
-      const darkState = savedTheme === 'dark';
-      setIsDark(darkState);
-      if (darkState) {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
+      darkState = savedTheme === 'dark';
     } else {
-      // Default to dark mode for Aura Noir concept
-      document.documentElement.classList.add('dark');
-      setIsDark(true);
+      // Default to light mode on first visit
+      darkState = false;
     }
+
+    setIsDark(darkState);
+    if (darkState) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    
+    setMounted(true);
   }, []);
 
   const toggleTheme = () => {
     const nextState = !isDark;
-    setIsDark(nextState);
-
-    if (nextState) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('aura-theme', 'dark');
+    
+    // GSAP animation for the swap
+    if (iconRef.current) {
+      gsap.to(iconRef.current, {
+        rotation: "+=180",
+        opacity: 0,
+        scale: 0.5,
+        duration: 0.125,
+        ease: "power2.in",
+        onComplete: () => {
+          setIsDark(nextState);
+          
+          if (nextState) {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('aura-theme', 'dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('aura-theme', 'light');
+          }
+          
+          gsap.to(iconRef.current, {
+            rotation: "+=180",
+            opacity: 1,
+            scale: 1,
+            duration: 0.125,
+            ease: "power2.out"
+          });
+        }
+      });
     } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('aura-theme', 'light');
+      // Fallback if ref is not attached
+      setIsDark(nextState);
+      if (nextState) {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('aura-theme', 'dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('aura-theme', 'light');
+      }
     }
   };
 
   if (!mounted) {
     return (
-      <div className="w-9 h-9 rounded-full border border-[#D4A02A]/20 bg-[#151517]" />
+      <div className="w-9 h-9 rounded-full border border-aura-line bg-aura-surface" />
     );
   }
 
   return (
     <button
       onClick={toggleTheme}
-      className={`relative p-2.5 rounded-full border transition-all duration-300 cursor-pointer flex items-center justify-center ${
-        isDark
-          ? 'bg-[#151517] text-[#E8C168] border-[#D4A02A]/30 hover:border-[#D4A02A] hover:shadow-[0_0_15px_rgba(212,160,42,0.3)]'
-          : 'bg-[#FFFFFF] text-[#B8860B] border-[#B8860B]/30 hover:border-[#B8860B] hover:shadow-md'
-      }`}
+      className="relative p-2.5 rounded-full border border-aura-line bg-aura-surface transition-all duration-300 cursor-pointer flex items-center justify-center hover:border-aura-gold hover:shadow-[0_0_15px_rgba(212,160,42,0.15)]"
       title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
       aria-label="Toggle Theme"
     >
-      {isDark ? (
-        <Sun className="w-4 h-4 text-[#D4A02A] transition-transform duration-500 rotate-0 hover:rotate-90" />
-      ) : (
-        <Moon className="w-4 h-4 text-[#B8860B] transition-transform duration-500 rotate-0 hover:-rotate-12" />
-      )}
+      <div ref={iconRef} className="flex items-center justify-center">
+        {isDark ? (
+          <Sun className="w-4 h-4 text-aura-gold" />
+        ) : (
+          <Moon className="w-4 h-4 text-aura-ink" />
+        )}
+      </div>
     </button>
   );
 }

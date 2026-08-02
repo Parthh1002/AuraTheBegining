@@ -174,7 +174,7 @@ export default function ProductDetailClient({
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+    <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-16 py-12 space-y-16">
       <nav className="text-xs text-aura-muted flex items-center gap-2">
         <Link href="/" className="hover:text-aura-gold">Home</Link>
         <span>/</span>

@@ -186,15 +186,15 @@ export default function ProductsAdminClient() {
 
   return (
     <div className="space-y-8 max-w-6xl">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#D4A02A]/20 pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-aura-gold/20 pb-4">
         <div>
-          <h1 className="font-serif text-3xl font-bold text-[#F5F1E8]">Product Catalog</h1>
-          <p className="text-xs text-[#9C9894] mt-1">Manage designs, fabrics, pricing labels, and high-res image uploads.</p>
+          <h1 className="font-serif text-3xl font-bold text-aura-ink">Product Catalog</h1>
+          <p className="text-xs text-aura-subink mt-1">Manage designs, fabrics, pricing labels, and high-res image uploads.</p>
         </div>
 
         <button
           onClick={openNewModal}
-          className="bg-[#D4A02A] text-[#0A0A0C] font-bold text-xs uppercase tracking-widest px-6 py-3 rounded hover:bg-[#E8C168] transition-colors inline-flex items-center gap-2 cursor-pointer shadow-lg"
+          className="bg-aura-gold text-aura-bg font-bold text-xs uppercase tracking-widest px-6 py-3 rounded hover:bg-aura-gold-soft transition-colors inline-flex items-center gap-2 cursor-pointer shadow-lg"
         >
           <Plus className="w-4 h-4" /> Add New Design
         </button>
@@ -206,15 +206,15 @@ export default function ProductsAdminClient() {
           placeholder="Filter products by name, SKU, collection..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full bg-[#151517] border border-[#D4A02A]/20 text-[#F5F1E8] pl-10 pr-4 py-2.5 rounded text-xs focus:outline-none focus:border-[#D4A02A]"
+          className="w-full bg-aura-surface border border-aura-gold/20 text-aura-ink pl-10 pr-4 py-2.5 rounded text-xs focus:outline-none focus:border-aura-gold"
         />
-        <Search className="w-4 h-4 text-[#9C9894] absolute left-3 top-3" />
+        <Search className="w-4 h-4 text-aura-subink absolute left-3 top-3" />
       </div>
 
-      <div className="bg-[#151517] border border-[#D4A02A]/20 rounded-xl overflow-hidden shadow-xl">
+      <div className="bg-aura-surface border border-aura-gold/20 rounded-xl overflow-hidden shadow-xl">
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs text-[#F5F1E8]">
-            <thead className="bg-[#1D1D20] text-[#D4A02A] uppercase tracking-wider text-[10px] border-b border-[#D4A02A]/15">
+          <table className="w-full text-left text-xs text-aura-ink">
+            <thead className="bg-aura-elevated text-aura-gold uppercase tracking-wider text-[10px] border-b border-aura-gold/15">
               <tr>
                 <th className="p-4">Design Name</th>
                 <th className="p-4">Collection</th>
@@ -227,26 +227,26 @@ export default function ProductsAdminClient() {
             <tbody className="divide-y divide-[#D4A02A]/10">
               {loading ? (
                 <tr>
-                  <td colSpan={6} className="p-8 text-center text-[#9C9894]">Loading catalog...</td>
+                  <td colSpan={6} className="p-8 text-center text-aura-subink">Loading catalog...</td>
                 </tr>
               ) : filteredProducts.length > 0 ? (
                 filteredProducts.map((p) => {
                   const primaryImg = p.product_images?.find((i: any) => i.is_primary)?.storage_path || p.product_images?.[0]?.storage_path;
                   return (
-                    <tr key={p.id} className="hover:bg-[#1D1D20]/50 transition-colors">
+                    <tr key={p.id} className="hover:bg-aura-elevated/50 transition-colors">
                       <td className="p-4 font-bold flex items-center gap-3">
-                        <div className="relative w-10 h-12 rounded overflow-hidden bg-[#1D1D20] shrink-0 border border-[#D4A02A]/20">
+                        <div className="relative w-10 h-12 rounded overflow-hidden bg-aura-elevated shrink-0 border border-aura-gold/20">
                           {primaryImg && <Image src={primaryImg} alt={p.name} fill className="object-cover" />}
                         </div>
                         <div>
                           <span>{p.name}</span>
                           {p.is_featured && (
-                            <span className="block text-[9px] text-[#D4A02A] font-sans uppercase">★ Featured</span>
+                            <span className="block text-[9px] text-aura-gold font-sans uppercase">★ Featured</span>
                           )}
                         </div>
                       </td>
-                      <td className="p-4 text-[#9C9894]">{p.collection_name || 'Uncategorized'}</td>
-                      <td className="p-4 font-mono text-[11px] text-[#E8C168]">{p.sku || '-'}</td>
+                      <td className="p-4 text-aura-subink">{p.collection_name || 'Uncategorized'}</td>
+                      <td className="p-4 font-mono text-[11px] text-aura-gold-soft">{p.sku || '-'}</td>
                       <td className="p-4">{p.price_label}</td>
                       <td className="p-4">
                         <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
@@ -258,13 +258,13 @@ export default function ProductsAdminClient() {
                       <td className="p-4 text-right space-x-2">
                         <button
                           onClick={() => openEditModal(p)}
-                          className="p-1.5 bg-[#1D1D20] hover:text-[#D4A02A] rounded border border-[#D4A02A]/20"
+                          className="p-1.5 bg-aura-elevated hover:text-aura-gold rounded border border-aura-gold/20"
                         >
                           <Edit3 className="w-4 h-4" />
                         </button>
                         <button
                           onClick={() => handleDeleteProduct(p.id)}
-                          className="p-1.5 bg-[#1D1D20] hover:text-red-400 rounded border border-red-500/20"
+                          className="p-1.5 bg-aura-elevated hover:text-red-400 rounded border border-red-500/20"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
@@ -274,7 +274,7 @@ export default function ProductsAdminClient() {
                 })
               ) : (
                 <tr>
-                  <td colSpan={6} className="p-8 text-center text-[#9C9894]">No products found matching criteria.</td>
+                  <td colSpan={6} className="p-8 text-center text-aura-subink">No products found matching criteria.</td>
                 </tr>
               )}
             </tbody>
@@ -283,52 +283,52 @@ export default function ProductsAdminClient() {
       </div>
 
       {modalOpen && (
-        <div className="fixed inset-0 z-50 bg-[#0A0A0C]/90 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
-          <div className="w-full max-w-2xl bg-[#151517] border border-[#D4A02A]/30 rounded-2xl p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto relative my-8 shadow-2xl">
+        <div className="fixed inset-0 z-50 bg-aura-bg/90 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+          <div className="w-full max-w-2xl bg-aura-surface border border-aura-gold/30 rounded-2xl p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto relative my-8 shadow-2xl">
             <button
               onClick={() => setModalOpen(false)}
-              className="absolute top-4 right-4 text-[#9C9894] hover:text-[#F5F1E8]"
+              className="absolute top-4 right-4 text-aura-subink hover:text-aura-ink"
             >
               <X className="w-6 h-6" />
             </button>
 
-            <h2 className="font-serif text-2xl font-bold text-[#F5F1E8]">
+            <h2 className="font-serif text-2xl font-bold text-aura-ink">
               {editingId ? 'Edit Product Design' : 'Add New Garment Design'}
             </h2>
 
             <form onSubmit={handleSaveProduct} className="space-y-4 text-xs">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="font-semibold text-[#F5F1E8]">Garment Name *</label>
+                  <label className="font-semibold text-aura-ink">Garment Name *</label>
                   <input
                     type="text"
                     required
                     value={formData.name}
                     onChange={(e) => handleNameChange(e.target.value)}
                     placeholder="e.g. Obsidian Velvet Bandhgala"
-                    className="w-full bg-[#1D1D20] border border-[#D4A02A]/20 text-[#F5F1E8] p-3 rounded"
+                    className="w-full bg-aura-elevated border border-aura-gold/20 text-aura-ink p-3 rounded"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-semibold text-[#F5F1E8]">URL Slug *</label>
+                  <label className="font-semibold text-aura-ink">URL Slug *</label>
                   <input
                     type="text"
                     required
                     value={formData.slug}
                     onChange={(e) => setFormData((prev) => ({ ...prev, slug: e.target.value }))}
-                    className="w-full bg-[#1D1D20] border border-[#D4A02A]/20 text-[#F5F1E8] p-3 rounded font-mono"
+                    className="w-full bg-aura-elevated border border-aura-gold/20 text-aura-ink p-3 rounded font-mono"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="font-semibold text-[#F5F1E8]">Collection / Category *</label>
+                  <label className="font-semibold text-aura-ink">Collection / Category *</label>
                   <select
                     value={formData.collection_id}
                     onChange={(e) => setFormData((prev) => ({ ...prev, collection_id: e.target.value }))}
-                    className="w-full bg-[#1D1D20] border border-[#D4A02A]/20 text-[#F5F1E8] p-3 rounded"
+                    className="w-full bg-aura-elevated border border-aura-gold/20 text-aura-ink p-3 rounded"
                   >
                     <option value="">Select Collection</option>
                     {collections.map((c) => (
@@ -338,69 +338,69 @@ export default function ProductsAdminClient() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-semibold text-[#F5F1E8]">Price Label *</label>
+                  <label className="font-semibold text-aura-ink">Price Label *</label>
                   <input
                     type="text"
                     value={formData.price_label}
                     onChange={(e) => setFormData((prev) => ({ ...prev, price_label: e.target.value }))}
                     placeholder="e.g. Starting at ₹14,999"
-                    className="w-full bg-[#1D1D20] border border-[#D4A02A]/20 text-[#F5F1E8] p-3 rounded"
+                    className="w-full bg-aura-elevated border border-aura-gold/20 text-aura-ink p-3 rounded"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="font-semibold text-[#F5F1E8]">Fabric & Hardware</label>
+                  <label className="font-semibold text-aura-ink">Fabric & Hardware</label>
                   <input
                     type="text"
                     value={formData.fabric}
                     onChange={(e) => setFormData((prev) => ({ ...prev, fabric: e.target.value }))}
                     placeholder="e.g. Italian Silk Velvet & Gold Hardware"
-                    className="w-full bg-[#1D1D20] border border-[#D4A02A]/20 text-[#F5F1E8] p-3 rounded"
+                    className="w-full bg-aura-elevated border border-aura-gold/20 text-aura-ink p-3 rounded"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-semibold text-[#F5F1E8]">SKU Code</label>
+                  <label className="font-semibold text-aura-ink">SKU Code</label>
                   <input
                     type="text"
                     value={formData.sku}
                     onChange={(e) => setFormData((prev) => ({ ...prev, sku: e.target.value }))}
-                    className="w-full bg-[#1D1D20] border border-[#D4A02A]/20 text-[#F5F1E8] p-3 rounded font-mono"
+                    className="w-full bg-aura-elevated border border-aura-gold/20 text-aura-ink p-3 rounded font-mono"
                   />
                 </div>
               </div>
 
               <div className="space-y-1">
-                <label className="font-semibold text-[#F5F1E8]">Available Sizes (Comma separated)</label>
+                <label className="font-semibold text-aura-ink">Available Sizes (Comma separated)</label>
                 <input
                   type="text"
                   value={formData.sizes}
                   onChange={(e) => setFormData((prev) => ({ ...prev, sizes: e.target.value }))}
                   placeholder="38, 40, 42, 44"
-                  className="w-full bg-[#1D1D20] border border-[#D4A02A]/20 text-[#F5F1E8] p-3 rounded"
+                  className="w-full bg-aura-elevated border border-aura-gold/20 text-aura-ink p-3 rounded"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="font-semibold text-[#F5F1E8]">Tags (Comma separated)</label>
+                <label className="font-semibold text-aura-ink">Tags (Comma separated)</label>
                 <input
                   type="text"
                   value={formData.tags}
                   onChange={(e) => setFormData((prev) => ({ ...prev, tags: e.target.value }))}
                   placeholder="new-arrival, bestseller"
-                  className="w-full bg-[#1D1D20] border border-[#D4A02A]/20 text-[#F5F1E8] p-3 rounded"
+                  className="w-full bg-aura-elevated border border-aura-gold/20 text-aura-ink p-3 rounded"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="font-semibold text-[#F5F1E8]">Detailed Description</label>
+                <label className="font-semibold text-aura-ink">Detailed Description</label>
                 <textarea
                   rows={3}
                   value={formData.description}
                   onChange={(e) => setFormData((prev) => ({ ...prev, description: e.target.value }))}
-                  className="w-full bg-[#1D1D20] border border-[#D4A02A]/20 text-[#F5F1E8] p-3 rounded"
+                  className="w-full bg-aura-elevated border border-aura-gold/20 text-aura-ink p-3 rounded"
                 />
               </div>
 
@@ -426,10 +426,10 @@ export default function ProductsAdminClient() {
                 </label>
               </div>
 
-              <div className="space-y-3 pt-4 border-t border-[#D4A02A]/15">
-                <label className="font-semibold text-[#F5F1E8] block">Product Images Upload (PostgreSQL Upload Endpoint)</label>
+              <div className="space-y-3 pt-4 border-t border-aura-gold/15">
+                <label className="font-semibold text-aura-ink block">Product Images Upload (PostgreSQL Upload Endpoint)</label>
 
-                <div className="border-2 border-dashed border-[#D4A02A]/30 rounded-xl p-6 text-center bg-[#1D1D20]/50 hover:border-[#D4A02A] transition-colors relative">
+                <div className="border-2 border-dashed border-aura-gold/30 rounded-xl p-6 text-center bg-aura-elevated/50 hover:border-aura-gold transition-colors relative">
                   <input
                     type="file"
                     multiple
@@ -437,12 +437,12 @@ export default function ProductsAdminClient() {
                     onChange={handleImageUpload}
                     className="absolute inset-0 opacity-0 cursor-pointer"
                   />
-                  <Upload className="w-8 h-8 text-[#D4A02A] mx-auto mb-2" />
-                  <p className="text-xs text-[#F5F1E8] font-bold">Drag & Drop images or click to select</p>
+                  <Upload className="w-8 h-8 text-aura-gold mx-auto mb-2" />
+                  <p className="text-xs text-aura-ink font-bold">Drag & Drop images or click to select</p>
                 </div>
 
                 {uploading && (
-                  <p className="text-xs text-[#E8C168] flex items-center gap-2">
+                  <p className="text-xs text-aura-gold-soft flex items-center gap-2">
                     <Loader2 className="w-4 h-4 animate-spin" /> Uploading image files...
                   </p>
                 )}
@@ -450,9 +450,9 @@ export default function ProductsAdminClient() {
                 {uploadedImages.length > 0 && (
                   <div className="flex flex-wrap gap-3 pt-2">
                     {uploadedImages.map((img, idx) => (
-                      <div key={idx} className="relative w-20 h-24 rounded border border-[#D4A02A]/30 overflow-hidden group">
+                      <div key={idx} className="relative w-20 h-24 rounded border border-aura-gold/30 overflow-hidden group">
                         <Image src={img.path} alt="Uploaded" fill className="object-cover" />
-                        <div className="absolute inset-0 bg-[#0A0A0C]/80 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center gap-1 transition-opacity">
+                        <div className="absolute inset-0 bg-aura-bg/80 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center gap-1 transition-opacity">
                           <button
                             type="button"
                             onClick={() => {
@@ -461,7 +461,7 @@ export default function ProductsAdminClient() {
                               );
                             }}
                             className={`p-1 rounded text-[10px] font-bold uppercase ${
-                              img.is_primary ? 'text-[#D4A02A]' : 'text-[#F5F1E8]'
+                              img.is_primary ? 'text-aura-gold' : 'text-aura-ink'
                             }`}
                           >
                             <Star className="w-3 h-3" />
@@ -485,7 +485,7 @@ export default function ProductsAdminClient() {
               <button
                 type="submit"
                 disabled={saving}
-                className="w-full bg-[#D4A02A] text-[#0A0A0C] font-bold text-xs uppercase tracking-widest py-3.5 rounded hover:bg-[#E8C168] transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-lg mt-4"
+                className="w-full bg-aura-gold text-aura-bg font-bold text-xs uppercase tracking-widest py-3.5 rounded hover:bg-aura-gold-soft transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-lg mt-4"
               >
                 {saving ? (
                   <>

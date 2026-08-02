@@ -18,32 +18,35 @@ export default function AdminLoginPage() {
     setLoading(true);
     setErrorMsg('');
 
-    try {
-      const data = await fetchApi('/auth/login', {
-        method: 'POST',
-        body: JSON.stringify({ email: email.trim(), password }),
-      });
-
-      if (data.token) {
-        localStorage.setItem('aura-admin-token', data.token);
-        document.cookie = `aura-admin-token=${data.token}; path=/; max-age=604800; SameSite=Lax`;
+    // HARDCODED CREDENTIALS AS PER USER REQUEST
+    if (email.trim() === '11a21278parth@gmail.com' && password === 'Aura@2026') {
+      // Create a mock token for local session
+      const mockToken = 'aura-admin-hardcoded-token-12345';
+      localStorage.setItem('aura-admin-token', mockToken);
+      document.cookie = `aura-admin-token=${mockToken}; path=/; max-age=604800; SameSite=Lax`;
+      
+      // Simulate network delay for UX
+      setTimeout(() => {
         router.push('/admin/dashboard');
         router.refresh();
-      }
-    } catch (err: any) {
-      setErrorMsg(err.message || 'Invalid credentials.');
-      setLoading(false);
+      }, 800);
+      return;
+    } else {
+      setTimeout(() => {
+        setErrorMsg('Invalid credentials. Access is restricted.');
+        setLoading(false);
+      }, 800);
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0A0C] flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-[#151517] border border-[#D4A02A]/30 rounded-2xl p-8 space-y-6 shadow-2xl relative overflow-hidden">
+    <div className="min-h-screen bg-aura-bg flex items-center justify-center p-4">
+      <div className="w-full max-w-md bg-aura-surface border border-aura-gold/30 rounded-2xl p-8 space-y-6 shadow-2xl relative overflow-hidden">
         <div className="absolute top-0 right-0 w-32 h-32 bg-[radial-gradient(circle,rgba(212,160,42,0.15)_0%,transparent_70%)] pointer-events-none" />
 
         <div className="text-center space-y-2">
-          <span className="font-serif text-3xl font-bold tracking-[0.2em] text-[#F5F1E8]">AURA</span>
-          <span className="block text-[10px] tracking-[0.3em] text-[#D4A02A] uppercase font-bold">ADMINISTRATOR CMS ACCESS</span>
+          <span className="font-serif text-3xl font-bold tracking-[0.2em] text-aura-ink">AURA</span>
+          <span className="block text-[10px] tracking-[0.3em] text-aura-gold uppercase font-bold">ADMINISTRATOR CMS ACCESS</span>
         </div>
 
         {errorMsg && (
@@ -55,7 +58,7 @@ export default function AdminLoginPage() {
 
         <form onSubmit={handleLogin} className="space-y-4">
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-[#F5F1E8]">Admin Email</label>
+            <label className="text-xs font-semibold text-aura-ink">Admin Email</label>
             <div className="relative">
               <input
                 type="email"
@@ -63,14 +66,14 @@ export default function AdminLoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full bg-[#1D1D20] border border-[#D4A02A]/20 text-[#F5F1E8] pl-10 pr-4 py-3 rounded text-xs focus:outline-none focus:border-[#D4A02A]"
+                className="w-full bg-aura-elevated border border-aura-gold/20 text-aura-ink pl-10 pr-4 py-3 rounded text-xs focus:outline-none focus:border-aura-gold"
               />
-              <Mail className="w-4 h-4 text-[#9C9894] absolute left-3 top-3.5" />
+              <Mail className="w-4 h-4 text-aura-subink absolute left-3 top-3.5" />
             </div>
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-[#F5F1E8]">Password</label>
+            <label className="text-xs font-semibold text-aura-ink">Password</label>
             <div className="relative">
               <input
                 type="password"
@@ -78,16 +81,16 @@ export default function AdminLoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full bg-[#1D1D20] border border-[#D4A02A]/20 text-[#F5F1E8] pl-10 pr-4 py-3 rounded text-xs focus:outline-none focus:border-[#D4A02A]"
+                className="w-full bg-aura-elevated border border-aura-gold/20 text-aura-ink pl-10 pr-4 py-3 rounded text-xs focus:outline-none focus:border-aura-gold"
               />
-              <Lock className="w-4 h-4 text-[#9C9894] absolute left-3 top-3.5" />
+              <Lock className="w-4 h-4 text-aura-subink absolute left-3 top-3.5" />
             </div>
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-[#D4A02A] text-[#0A0A0C] font-bold text-xs uppercase tracking-widest py-3.5 rounded hover:bg-[#E8C168] transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-lg disabled:opacity-50 mt-2"
+            className="w-full bg-aura-gold text-aura-bg font-bold text-xs uppercase tracking-widest py-3.5 rounded hover:bg-aura-gold-soft transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-lg disabled:opacity-50 mt-2"
           >
             {loading ? (
               <>

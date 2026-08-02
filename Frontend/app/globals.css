@@ -1,39 +1,81 @@
 @import "tailwindcss";
 
+@theme {
+  --color-aura-bg:       var(--aura-bg);
+  --color-aura-surface:  var(--aura-surface);
+  --color-aura-elevated: var(--aura-elevated);
+  --color-aura-ink:      var(--aura-ink);
+  --color-aura-subink:   var(--aura-subink);
+  --color-aura-gold:     var(--aura-gold);
+  --color-aura-gold-text:var(--aura-gold-text);
+  --color-aura-gold-tint:var(--aura-gold-tint);
+  --color-aura-gold-soft:var(--aura-gold-soft);
+  --color-aura-copper:   var(--aura-copper);
+  --color-aura-line:     var(--aura-line);
+  --color-aura-success:  var(--aura-success);
+  --color-aura-alert:    var(--aura-alert);
+
+  /* Legacy mappings — keep old class names working */
+  --color-aura-void:   var(--aura-bg);
+  --color-aura-panel:  var(--aura-surface);
+  --color-aura-cream:  var(--aura-ink);
+  --color-aura-muted:  var(--aura-subink);
+}
+
 @layer base {
   :root {
-    --aura-bg-void: #FAF8F5;
-    --aura-bg-panel: #FFFFFF;
-    --aura-bg-elevated: #F2EFE9;
-    --aura-gold: #B8860B;
-    --aura-gold-soft: #D4A02A;
-    --aura-copper: #8B5E34;
-    --aura-cream: #1A1A1E;
-    --aura-muted: #66625D;
-    --aura-line: rgba(184, 134, 11, 0.2);
-    --aura-card-border: rgba(184, 134, 11, 0.2);
+    /* ── LIGHT MODE — "Ivory Boutique" ─────────────────── */
+    --aura-bg:              #ECE3D0;   /* deeper warm sand tone (was #F7F3EC) */
+    --aura-surface:         #FBF8F2;   /* soft warm white — now clearly pops against bg */
+    --aura-surface-alt:     #F3EEE3;   /* deeper warm white, zebra / nested cards */
+    --aura-elevated:        #FBF8F2;   /* same as surface for light mode */
+    --aura-ink:             #1B1A18;
+    --aura-subink:          #6E675C;
+    --aura-gold:            #C9A227;
+    --aura-gold-on-surface: #B8891E;   /* deepened gold for icons/borders ON surfaces */
+    --aura-gold-text:       #8F660B;
+    --aura-gold-tint:       #FBF3DE;
+    --aura-gold-soft:       #C9A227;
+    --aura-copper:          #8B5E34;
+    --aura-line:            #DDD6C8;   /* slightly stronger hairline for defined edges */
+    --aura-success:         #3F7D5C;
+    --aura-alert:           #B5502E;
+
+    /* ── ELEVATION SHADOWS (3-level scale) ─────────────── */
+    --shadow-card:          0 1px 2px rgba(27,26,24,0.04), 0 4px 16px rgba(27,26,24,0.06);
+    --shadow-card-hover:    0 4px 8px rgba(27,26,24,0.07), 0 16px 40px rgba(27,26,24,0.11);
+    --shadow-modal:         0 8px 16px rgba(27,26,24,0.09), 0 32px 64px rgba(27,26,24,0.18);
   }
 
   :root.dark {
-    --aura-bg-void: #0A0A0C;
-    --aura-bg-panel: #151517;
-    --aura-bg-elevated: #1D1D20;
-    --aura-gold: #D4A02A;
-    --aura-gold-soft: #E8C168;
-    --aura-copper: #8B5E34;
-    --aura-cream: #F5F1E8;
-    --aura-muted: #9C9894;
-    --aura-line: rgba(212, 160, 42, 0.14);
-    --aura-card-border: rgba(212, 160, 42, 0.15);
+    /* ── DARK MODE — "Aura Noir" ────────────────────────── */
+    --aura-bg:              #0A0A0C;
+    --aura-surface:         #151517;
+    --aura-surface-alt:     #1A1A1D;
+    --aura-elevated:        #1D1D20;
+    --aura-ink:             #F5F1E8;
+    --aura-subink:          #9C9894;
+    --aura-gold:            #D4A02A;
+    --aura-gold-on-surface: #D4A02A;
+    --aura-gold-text:       #D4A02A;
+    --aura-gold-tint:       #1D1D20;
+    --aura-gold-soft:       #E8C168;
+    --aura-copper:          #8B5E34;
+    --aura-line:            rgba(212,160,42,0.14);
+    --aura-success:         #3F7D5C;
+    --aura-alert:           #B5502E;
+
+    --shadow-card:          none;
+    --shadow-card-hover:    none;
+    --shadow-modal:         none;
   }
 
   body {
-    background-color: var(--aura-bg-void);
-    color: var(--aura-cream);
+    background-color: var(--aura-bg);
+    color: var(--aura-ink);
     font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
     overflow-x: hidden;
-    margin: 0;
-    padding: 0;
+    margin: 0; padding: 0;
     -webkit-font-smoothing: antialiased;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
@@ -43,57 +85,132 @@
   }
 }
 
-/* Custom Utilities for Aura Theme */
-.bg-aura-void { background-color: var(--aura-bg-void); }
-.bg-aura-panel { background-color: var(--aura-bg-panel); }
-.bg-aura-elevated { background-color: var(--aura-bg-elevated); }
-.text-aura-gold { color: var(--aura-gold); }
-.text-aura-gold-soft { color: var(--aura-gold-soft); }
-.text-aura-copper { color: var(--aura-copper); }
-.text-aura-cream { color: var(--aura-cream); }
-.text-aura-muted { color: var(--aura-muted); }
-.border-aura-line { border-color: var(--aura-line); }
+/* ════════════════════════════════════════════
+   ELEVATION / CARD SYSTEM
+   ════════════════════════════════════════════ */
+.card-resting {
+  background: var(--aura-surface);
+  border: 1px solid var(--aura-line);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 180ms ease, transform 180ms ease, border-color 180ms ease;
+}
+.card-resting:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+  border-color: var(--aura-gold-on-surface);
+}
+.card-modal {
+  background: var(--aura-surface);
+  border: 1px solid var(--aura-line);
+  box-shadow: var(--shadow-modal);
+}
 
-.glow-amber-sm {
-  box-shadow: 0 0 15px rgba(212, 160, 42, 0.15);
+/* ════════════════════════════════════════════
+   PREMIUM LINK UNDERLINE (scaleX draw)
+   ════════════════════════════════════════════ */
+.link-gold {
+  position: relative;
+  display: inline-block;
 }
-.glow-amber-md {
-  box-shadow: 0 0 30px rgba(212, 160, 42, 0.25);
+.link-gold::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -2px;
+  width: 100%; height: 1px;
+  background: var(--aura-gold-on-surface);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 200ms ease;
 }
-.glow-amber-lg {
-  box-shadow: 0 0 50px rgba(212, 160, 42, 0.35);
+.link-gold:hover::after { transform: scaleX(1); }
+
+/* ════════════════════════════════════════════
+   IMAGE DUOTONE WARM OVERLAY
+   ════════════════════════════════════════════ */
+.img-duotone-light::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(212,160,42,0.04);
+  pointer-events: none;
+}
+:root.dark .img-duotone-dark::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(212,160,42,0.07);
+  pointer-events: none;
 }
 
+/* ════════════════════════════════════════════
+   WISHLIST HEART BOUNCE
+   ════════════════════════════════════════════ */
+@keyframes heartPop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.45); }
+  70%  { transform: scale(0.88); }
+  100% { transform: scale(1); }
+}
+.heart-pop { animation: heartPop 0.38s cubic-bezier(0.36,0.07,0.19,0.97) both; }
+
+/* ════════════════════════════════════════════
+   GLOW UTILITIES
+   ════════════════════════════════════════════ */
+.glow-amber-sm { box-shadow: 0 0 15px rgba(212,160,42,0.15); }
+.glow-amber-md { box-shadow: 0 0 30px rgba(212,160,42,0.25); }
+.glow-amber-lg { box-shadow: 0 0 50px rgba(212,160,42,0.35); }
+
+/* ════════════════════════════════════════════
+   TEXT GRADIENT
+   ════════════════════════════════════════════ */
 .text-gradient-amber {
-  background: linear-gradient(135deg, var(--aura-cream) 0%, var(--aura-gold-soft) 50%, var(--aura-gold) 100%);
+  background: linear-gradient(135deg, var(--aura-ink) 0%, var(--aura-gold-soft) 50%, var(--aura-gold) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.hairline-border {
-  border: 1px solid var(--aura-line);
-}
+/* ════════════════════════════════════════════
+   HAIRLINE BORDER
+   ════════════════════════════════════════════ */
+.hairline-border { border: 1px solid var(--aura-line); }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: var(--aura-bg-void);
-}
+/* ════════════════════════════════════════════
+   SCROLLBAR
+   ════════════════════════════════════════════ */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--aura-bg); }
 ::-webkit-scrollbar-thumb {
-  background: var(--aura-bg-elevated);
+  background: var(--aura-elevated);
   border: 1px solid var(--aura-line);
   border-radius: 4px;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: var(--aura-gold);
-}
+::-webkit-scrollbar-thumb:hover { background: var(--aura-gold); }
 
-/* Glassmorphism */
+/* ════════════════════════════════════════════
+   GLASSMORPHISM
+   ════════════════════════════════════════════ */
 .glass-panel {
-  background: var(--aura-bg-panel);
+  background: var(--aura-surface);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--aura-line);
 }
+
+/* ════════════════════════════════════════════
+   PREMIUM POPUP ANIMATION
+   ════════════════════════════════════════════ */
+@keyframes premiumPopup {
+  0%   { opacity: 0; transform: scale(0.9) translateY(20px); filter: blur(10px); }
+  100% { opacity: 1; transform: scale(1)   translateY(0);    filter: blur(0);    }
+}
+.animate-premium-popup {
+  animation: premiumPopup 0.6s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+
+/* ════════════════════════════════════════════
+   SECTION SPACING RHYTHM
+   ════════════════════════════════════════════ */
+.section-gap-xl  { padding-top: 96px;  padding-bottom: 96px;  }
+.section-gap-lg  { padding-top: 64px;  padding-bottom: 64px;  }
+.section-gap-md  { padding-top: 48px;  padding-bottom: 48px;  }
+.section-gap-sm  { padding-top: 24px;  padding-bottom: 24px;  }

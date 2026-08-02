@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { MapPin, Phone, Mail, Send } from 'lucide-react';
-import InstagramIcon from '@/components/ui/InstagramIcon';
+import { InstagramIcon, WhatsAppIcon, YouTubeIcon } from '@/components/ui/SocialIcons';
 
 export default function Footer() {
   const [newsletterEmail, setNewsletterEmail] = useState('');
@@ -40,7 +40,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-aura-void border-t border-aura-line text-aura-muted pt-16 pb-12 transition-colors">
+    <footer className="dark bg-aura-bg border-t border-aura-line text-aura-subink pt-16 pb-12 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 pb-12 border-b border-aura-line">
           {/* Brand Info */}
@@ -61,6 +61,24 @@ export default function Footer() {
                 aria-label="Instagram"
               >
                 <InstagramIcon className="w-4 h-4" />
+              </a>
+              <a
+                href="https://wa.me/919876543210"
+                target="_blank"
+                rel="noreferrer"
+                className="w-8 h-8 rounded-full border border-aura-line flex items-center justify-center text-aura-cream hover:border-aura-gold hover:text-aura-gold transition-colors"
+                aria-label="WhatsApp"
+              >
+                <WhatsAppIcon className="w-4 h-4" />
+              </a>
+              <a
+                href="https://youtube.com"
+                target="_blank"
+                rel="noreferrer"
+                className="w-8 h-8 rounded-full border border-aura-line flex items-center justify-center text-aura-cream hover:border-aura-gold hover:text-aura-gold transition-colors"
+                aria-label="YouTube"
+              >
+                <YouTubeIcon className="w-4 h-4" />
               </a>
             </div>
           </div>

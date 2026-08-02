@@ -16,7 +16,7 @@ export default function LookbookClient({ galleryItems }: { galleryItems: Gallery
   const [activeItem, setActiveItem] = useState<GalleryItem | null>(null);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
+    <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-16 py-12 space-y-10">
       <div className="text-center max-w-2xl mx-auto space-y-3">
         <span className="text-xs font-sans tracking-[0.3em] text-aura-gold uppercase font-bold">AURA STORIES</span>
         <h1 className="font-serif text-4xl sm:text-5xl text-aura-cream font-bold">The Editorial Lookbook</h1>

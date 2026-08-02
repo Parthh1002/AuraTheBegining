@@ -32,11 +32,11 @@ export default function AdminSidebar() {
   return (
     <>
       {/* Mobile Admin Header Bar */}
-      <div className="md:hidden w-full bg-aura-panel border-b border-aura-line p-4 flex items-center justify-between sticky top-0 z-40 shadow-md">
+      <div className="md:hidden w-full bg-aura-surface border-b border-aura-line p-4 flex items-center justify-between sticky top-0 z-40 shadow-md">
         <Link href="/admin/dashboard" className="flex items-center gap-2">
           <AuraLogoMark className="w-7 h-7 text-aura-gold" />
           <div className="flex flex-col">
-            <span className="font-serif text-lg font-bold tracking-[0.2em] text-aura-cream">AURA</span>
+            <span className="font-serif text-lg font-bold tracking-[0.2em] text-aura-ink">AURA</span>
             <span className="text-[8px] tracking-[0.25em] text-aura-gold uppercase font-bold">ADMIN PORTAL</span>
           </div>
         </Link>
@@ -45,7 +45,7 @@ export default function AdminSidebar() {
           <ThemeToggle />
           <button
             onClick={() => setMobileNavOpen(!mobileNavOpen)}
-            className="p-2 text-aura-cream hover:text-aura-gold"
+            className="p-2 text-aura-ink hover:text-aura-gold"
             aria-label="Toggle Admin Navigation"
           >
             {mobileNavOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -54,7 +54,7 @@ export default function AdminSidebar() {
       </div>
 
       {/* Desktop Sidebar Panel */}
-      <aside className={`fixed md:static inset-y-0 left-0 z-50 w-64 bg-aura-panel border-r border-aura-line p-6 flex flex-col justify-between shrink-0 transition-transform duration-300 ${
+      <aside className={`fixed md:static inset-y-0 left-0 z-50 w-64 bg-aura-surface border-r border-aura-line p-6 flex flex-col justify-between shrink-0 transition-transform duration-300 ${
         mobileNavOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
       }`}>
         <div className="space-y-8">
@@ -62,7 +62,7 @@ export default function AdminSidebar() {
             <Link href="/" className="flex items-center gap-3 group">
               <AuraLogoMark className="w-8 h-8 text-aura-gold group-hover:scale-105 transition-transform" />
               <div className="flex flex-col">
-                <span className="font-serif text-xl font-bold tracking-[0.2em] text-aura-cream group-hover:text-aura-gold transition-colors">
+                <span className="font-serif text-xl font-bold tracking-[0.2em] text-aura-ink group-hover:text-aura-gold transition-colors">
                   AURA
                 </span>
                 <span className="text-[9px] tracking-[0.3em] text-aura-gold uppercase font-semibold">
@@ -87,8 +87,8 @@ export default function AdminSidebar() {
                   onClick={() => setMobileNavOpen(false)}
                   className={`flex items-center gap-3 px-4 py-3 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all ${
                     isActive
-                      ? 'bg-aura-gold text-[#0A0A0C] font-bold shadow-md'
-                      : 'text-aura-muted hover:bg-aura-elevated hover:text-aura-cream'
+                      ? 'bg-aura-gold text-aura-bg font-bold shadow-md'
+                      : 'text-aura-subink hover:bg-aura-elevated hover:text-aura-ink'
                   }`}
                 >
                   <Icon className="w-4 h-4 shrink-0" />
@@ -103,7 +103,7 @@ export default function AdminSidebar() {
           <Link
             href="/"
             target="_blank"
-            className="flex items-center gap-2 px-4 py-2.5 rounded text-xs text-aura-muted hover:text-aura-gold hover:bg-aura-elevated transition-colors"
+            className="flex items-center gap-2 px-4 py-2.5 rounded text-xs text-aura-subink hover:text-aura-gold hover:bg-aura-elevated transition-colors"
           >
             <Store className="w-4 h-4" /> View Live Storefront
           </Link>
@@ -121,7 +121,7 @@ export default function AdminSidebar() {
       {mobileNavOpen && (
         <div
           onClick={() => setMobileNavOpen(false)}
-          className="fixed inset-0 bg-aura-void/80 backdrop-blur-sm z-40 md:hidden"
+          className="fixed inset-0 bg-aura-bg/80 backdrop-blur-sm z-40 md:hidden"
         />
       )}
     </>
