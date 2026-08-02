@@ -283,8 +283,8 @@ export default function ProductsAdminClient() {
       </div>
 
       {modalOpen && (
-        <div className="fixed inset-0 z-50 bg-aura-bg/90 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
-          <div className="w-full max-w-2xl bg-aura-surface border border-aura-gold/30 rounded-2xl p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto relative my-8 shadow-2xl">
+        <div className="fixed inset-0 z-50 bg-aura-bg/90 backdrop-blur-md flex items-start justify-center p-4 pt-10 pb-10 overflow-y-auto" data-lenis-prevent="true">
+          <div className="w-full max-w-2xl bg-aura-surface border border-aura-gold/30 rounded-2xl p-6 sm:p-8 space-y-6 relative my-auto shadow-2xl shrink-0">
             <button
               onClick={() => setModalOpen(false)}
               className="absolute top-4 right-4 text-aura-subink hover:text-aura-ink"

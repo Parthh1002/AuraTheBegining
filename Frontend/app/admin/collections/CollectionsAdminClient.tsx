@@ -168,9 +168,9 @@ export default function CollectionsAdminClient() {
       </div>
 
       {modalOpen && (
-        <div className="fixed inset-0 z-50 bg-aura-bg/90 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="w-full max-w-md bg-aura-surface border border-aura-gold/30 rounded-2xl p-6 space-y-6 relative shadow-2xl">
-            <button onClick={() => setModalOpen(false)} className="absolute top-4 right-4 text-aura-subink">
+        <div className="fixed inset-0 z-50 bg-aura-bg/90 backdrop-blur-md flex items-start justify-center p-4 pt-10 pb-10 overflow-y-auto" data-lenis-prevent="true">
+          <div className="w-full max-w-md bg-aura-surface border border-aura-gold/30 rounded-2xl p-6 space-y-6 relative shadow-2xl my-auto shrink-0">
+            <button onClick={() => setModalOpen(false)} className="absolute top-4 right-4 text-aura-subink hover:text-aura-ink">
               <X className="w-5 h-5" />
             </button>
 
