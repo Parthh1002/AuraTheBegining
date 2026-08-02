@@ -17,6 +17,7 @@ export default function Header() {
   const [searchQuery, setSearchQuery] = useState('');
 
   const headerRef = useRef<HTMLElement>(null);
+  const navContainerRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const mobileLinksRef = useRef<HTMLDivElement>(null);
 
@@ -42,28 +43,41 @@ export default function Header() {
     };
   }, []);
 
-  // Scroll GSAP Animation
+  // Scroll GSAP Animation for Pill Shape
   useEffect(() => {
     const handleScroll = () => {
       const scrolled = window.scrollY > 80;
       if (scrolled !== isScrolled) {
         setIsScrolled(scrolled);
-        if (headerRef.current) {
-          gsap.to(headerRef.current, {
-            duration: 0.3,
-            backgroundColor: scrolled ? 'color-mix(in srgb, var(--aura-surface) 90%, transparent)' : 'transparent',
+        if (navContainerRef.current) {
+          gsap.to(navContainerRef.current, {
+            duration: 0.4,
+            backgroundColor: scrolled ? 'color-mix(in srgb, var(--aura-surface) 95%, transparent)' : 'transparent',
             boxShadow: scrolled ? 'var(--shadow-card-hover)' : 'none',
-            backdropFilter: scrolled ? 'blur(12px)' : 'blur(0px)',
-            height: scrolled ? (window.innerWidth >= 768 ? 72 : 64) : (window.innerWidth >= 768 ? 88 : 72),
-            ease: 'power2.out',
+            backdropFilter: scrolled ? 'blur(16px)' : 'blur(0px)',
+            border: scrolled ? '1px solid var(--aura-line)' : '1px solid transparent',
+            borderRadius: scrolled ? '100px' : '0px',
+            width: scrolled ? '95%' : '100%',
+            maxWidth: scrolled ? '1100px' : '1400px',
+            marginTop: scrolled ? '16px' : '0px',
+            height: scrolled ? (window.innerWidth >= 768 ? 64 : 64) : (window.innerWidth >= 768 ? 88 : 72),
+            paddingLeft: scrolled ? '32px' : '20px',
+            paddingRight: scrolled ? '32px' : '20px',
+            ease: 'power3.out',
           });
         }
       }
     };
     window.addEventListener('scroll', handleScroll);
     // Init height
-    if (headerRef.current) {
-      gsap.set(headerRef.current, { height: window.innerWidth >= 768 ? 88 : 72 });
+    if (navContainerRef.current) {
+      gsap.set(navContainerRef.current, { 
+        height: window.innerWidth >= 768 ? 88 : 72,
+        paddingLeft: '20px',
+        paddingRight: '20px',
+        width: '100%',
+        maxWidth: '1400px'
+      });
     }
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isScrolled]);
@@ -99,23 +113,27 @@ export default function Header() {
     <>
       <header
         ref={headerRef}
-        className="fixed top-0 left-0 right-0 z-40 flex items-center justify-center transition-colors border-b border-transparent"
-        style={{ borderBottomColor: isScrolled ? 'var(--aura-line)' : 'transparent' }}
+        className="fixed top-0 left-0 right-0 z-40 flex justify-center transition-colors pointer-events-none"
       >
         {/* Top gradient for non-scrolled state for legibility */}
         {!isScrolled && (
-          <div className="absolute inset-0 bg-gradient-to-b from-aura-bg/60 to-transparent pointer-events-none -z-10" />
+          <div className="absolute inset-0 bg-gradient-to-b from-aura-bg/60 to-transparent pointer-events-none -z-10 h-32" />
         )}
         
-        <div className="w-full max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 flex items-center justify-between">
+        <div 
+          ref={navContainerRef}
+          className="mx-auto flex items-center justify-between pointer-events-auto transition-all"
+        >
           
-          {/* Logo Mark + Brand Title */}
-          <Link href="/" className="group block" onClick={() => setMobileMenuOpen(false)}>
-            <AuraWordmark size="medium" layout="horizontal" />
-          </Link>
+          {/* Logo Mark + Brand Title (Left Aligned) */}
+          <div className="flex-1 flex justify-start">
+            <Link href="/" className="group block" onClick={() => setMobileMenuOpen(false)}>
+              <AuraWordmark size={isScrolled ? "small" : "medium"} layout="horizontal" />
+            </Link>
+          </div>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center" style={{ gap: '40px' }}>
+          {/* Desktop Navigation Links (Center Aligned) */}
+          <nav className="hidden lg:flex items-center justify-center flex-1" style={{ gap: '40px' }}>
             {navItems.map((item) => {
               const active = pathname === item.href;
               return (
@@ -143,49 +161,49 @@ export default function Header() {
             })}
           </nav>
 
-          {/* Right Controls */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          {/* Right Controls (Right Aligned) */}
+          <div className="flex-1 flex justify-end items-center gap-1 sm:gap-2">
             {/* Search */}
             <button
               onClick={() => setSearchOpen(true)}
-              className="w-11 h-11 rounded-full flex items-center justify-center text-aura-ink hover:text-aura-gold-on-surface transition-colors cursor-pointer group"
+              className="w-10 h-10 rounded-full flex items-center justify-center text-aura-ink hover:text-aura-gold-on-surface transition-colors cursor-pointer group relative"
               aria-label="Search Catalog"
             >
               <div className="absolute inset-0 rounded-full scale-50 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300" 
                    style={{ background: 'color-mix(in srgb, var(--aura-gold) 10%, transparent)' }} />
-              <Search className="w-5 h-5 relative z-10" />
+              <Search className="w-4 h-4 relative z-10" />
             </button>
 
             {/* Wishlist */}
             <Link
               href="/wishlist"
-              className="relative w-11 h-11 rounded-full flex items-center justify-center text-aura-ink hover:text-aura-gold-on-surface transition-colors group"
+              className="relative w-10 h-10 rounded-full flex items-center justify-center text-aura-ink hover:text-aura-gold-on-surface transition-colors group"
               aria-label="Wishlist"
             >
               <div className="absolute inset-0 rounded-full scale-50 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300" 
                    style={{ background: 'color-mix(in srgb, var(--aura-gold) 10%, transparent)' }} />
-              <Heart className="w-5 h-5 relative z-10" />
+              <Heart className="w-4 h-4 relative z-10" />
               {wishlistCount > 0 && (
-                <span className="absolute top-1 right-1 w-4 h-4 rounded-full bg-aura-gold text-[#0A0A0C] text-[10px] font-bold flex items-center justify-center z-20 border border-aura-surface">
+                <span className="absolute top-0 right-0 w-4 h-4 rounded-full bg-aura-gold text-[#0A0A0C] text-[10px] font-bold flex items-center justify-center z-20 border border-aura-surface">
                   {wishlistCount}
                 </span>
               )}
             </Link>
 
-            {/* Theme Toggle — styled as a 44x44 target */}
-            <div className="w-11 h-11 flex items-center justify-center rounded-full group cursor-pointer hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+            {/* Theme Toggle */}
+            <div className="w-10 h-10 flex items-center justify-center rounded-full group cursor-pointer hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
               <ThemeToggle />
             </div>
 
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setMobileMenuOpen(true)}
-              className="md:hidden w-11 h-11 rounded-full flex items-center justify-center text-aura-ink hover:text-aura-gold-on-surface transition-colors cursor-pointer group ml-1"
+              className="lg:hidden w-10 h-10 rounded-full flex items-center justify-center text-aura-ink hover:text-aura-gold-on-surface transition-colors cursor-pointer group relative ml-1"
               aria-label="Open Menu"
             >
               <div className="absolute inset-0 rounded-full scale-50 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300" 
                    style={{ background: 'color-mix(in srgb, var(--aura-gold) 10%, transparent)' }} />
-              <Menu className="w-6 h-6 relative z-10" />
+              <Menu className="w-5 h-5 relative z-10" />
             </button>
           </div>
         </div>
@@ -205,7 +223,7 @@ export default function Header() {
             </Link>
             <button 
               onClick={() => setMobileMenuOpen(false)} 
-              className="w-11 h-11 flex items-center justify-center text-white/80 hover:text-[#D4A02A] transition-colors"
+              className="w-11 h-11 flex items-center justify-center text-white/80 hover:text-[#D4A02A] transition-colors cursor-pointer"
             >
               <X className="w-6 h-6" />
             </button>
@@ -245,7 +263,7 @@ export default function Header() {
           <div className="w-full max-w-2xl bg-aura-surface border border-aura-line rounded-lg p-6 shadow-2xl relative">
             <button
               onClick={() => setSearchOpen(false)}
-              className="absolute top-4 right-4 text-aura-subink hover:text-aura-ink w-8 h-8 flex items-center justify-center"
+              className="absolute top-4 right-4 text-aura-subink hover:text-aura-ink w-8 h-8 flex items-center justify-center cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>

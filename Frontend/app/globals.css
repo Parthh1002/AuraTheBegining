@@ -25,10 +25,10 @@
 @layer base {
   :root {
     /* ── LIGHT MODE — "Ivory Boutique" ─────────────────── */
-    --aura-bg:              #ECE3D0;   /* deeper warm sand tone (was #F7F3EC) */
-    --aura-surface:         #FBF8F2;   /* soft warm white — now clearly pops against bg */
+    --aura-bg:              #EDEADE;   /* deeper warm sand tone (was #ECE3D0) */
+    --aura-surface:         #FFFFFF;   /* pure white — clearly pops against bg */
     --aura-surface-alt:     #F3EEE3;   /* deeper warm white, zebra / nested cards */
-    --aura-elevated:        #FBF8F2;   /* same as surface for light mode */
+    --aura-elevated:        #FFFFFF;   /* same as surface for light mode */
     --aura-ink:             #1B1A18;
     --aura-subink:          #6E675C;
     --aura-gold:            #C9A227;

@@ -7,6 +7,7 @@ import CursorGlow from '@/components/animation/CursorGlow';
 import LenisProvider from '@/components/animation/LenisProvider';
 import Header from '@/components/storefront/Header';
 import Footer from '@/components/storefront/Footer';
+import AuraParticles from '@/components/animation/AuraParticles';
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -54,14 +55,17 @@ export default function RootLayout({
           {/* Desktop Subtle Amber Radial Cursor Follower */}
           <CursorGlow />
 
+          {/* Global Background Particles */}
+          <AuraParticles variant="light" className="fixed inset-0 z-0 pointer-events-none opacity-60 dark:opacity-40" />
+
           {/* Site Navigation Header */}
           <Header />
 
           {/* Main Page Content */}
-          <main className="min-h-screen pt-20">{children}</main>
+          <main className="min-h-screen pt-20 relative z-10">{children}</main>
 
           {/* Site Footer */}
-          <Footer />
+          <div className="relative z-10"><Footer /></div>
         </LenisProvider>
       </body>
     </html>
