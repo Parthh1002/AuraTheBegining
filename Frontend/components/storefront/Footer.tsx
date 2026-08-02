@@ -2,13 +2,17 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { MapPin, Phone, Mail, Send } from 'lucide-react';
 import { InstagramIcon, WhatsAppIcon, YouTubeIcon } from '@/components/ui/SocialIcons';
 
 export default function Footer() {
+  const pathname = usePathname();
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [newsletterMsg, setNewsletterMsg] = useState('');
+
+  if (pathname.startsWith('/admin')) return null;
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

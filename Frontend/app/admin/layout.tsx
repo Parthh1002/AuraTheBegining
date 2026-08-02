@@ -16,11 +16,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     
     if (token === 'aura-admin-hardcoded-token-12345') {
       setIsAuthorized(true);
+      // If already logged in and on the login page, redirect to dashboard
+      if (pathname === '/admin/login') {
+        router.replace('/admin/dashboard');
+      }
     } else {
       setIsAuthorized(false);
-      // If not on login page and not authorized, redirect to login
+      // If not on login page and not authorized, redirect to login safely
       if (pathname !== '/admin/login') {
-        router.replace('/admin/login');
+        window.location.href = '/admin/login';
       }
     }
     
@@ -40,11 +44,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
   // If not authorized and trying to access a protected route
+  // Return a loading screen while the useEffect redirect kicks in
   if (!isAuthorized && pathname !== '/admin/login') {
-    // Force a hard redirect if the router fails
-    if (typeof window !== 'undefined') {
-      window.location.href = '/admin/login';
-    }
     return (
       <div className="min-h-screen bg-[#0A0A0C] flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
