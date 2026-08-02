@@ -87,37 +87,18 @@ export default function VisitUsClient({
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <ScrollReveal direction="up" delay={0.1} className="lg:col-span-2 space-y-8">
-          <div className="bg-aura-panel border border-aura-line rounded-xl overflow-hidden shadow-2xl h-[500px] relative group ring-1 ring-aura-gold/20">
-            {/* The Locked Map */}
+          <div className="bg-aura-panel border border-aura-gold/30 rounded-xl overflow-hidden shadow-[0_0_40px_rgba(212,160,42,0.15)] h-[500px] relative group transition-all duration-500 hover:shadow-[0_0_50px_rgba(212,160,42,0.25)]">
+            {/* Fully Interactive Map with Prominent Native Pin */}
             <iframe
               title="AURA (The Beginning) Exact Location"
               src="https://maps.google.com/maps?q=23.16286593494573,72.80827951499718&t=k&hl=en&z=20&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0, filter: 'contrast(1.1) saturate(1.2)' }}
-              className="pointer-events-none scale-110" 
+              className="w-full h-full"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />
-            
-            {/* Premium Custom Map Marker Highlight */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center pointer-events-none">
-              <div className="relative flex items-center justify-center">
-                {/* Ping / Glow animations */}
-                <div className="absolute w-16 h-16 bg-aura-gold/40 rounded-full animate-ping" />
-                <div className="absolute w-24 h-24 bg-aura-gold/20 rounded-full animate-pulse" />
-                {/* Center marker */}
-                <div className="relative w-12 h-12 bg-aura-surface backdrop-blur-md rounded-full border-2 border-aura-gold flex items-center justify-center shadow-[0_0_30px_rgba(212,160,42,0.8)]">
-                  <MapPin className="w-5 h-5 text-aura-gold fill-aura-gold/20" />
-                </div>
-              </div>
-              <div className="mt-3 bg-aura-surface backdrop-blur-md px-4 py-1.5 rounded-full border border-aura-gold/50 shadow-xl">
-                <span className="font-serif font-bold tracking-[0.2em] text-aura-ink text-[10px] uppercase">AURA MENS WEAR</span>
-              </div>
-            </div>
-            
-            {/* Overlay to block interaction but allow visual feedback */}
-            <div className="absolute inset-0 bg-aura-bg/5 pointer-events-none" />
           </div>
 
           <div className="flex flex-col sm:flex-row gap-6 bg-aura-elevated border border-aura-line rounded-xl p-6 shadow-md">
