@@ -189,7 +189,7 @@ export default function IntroOverlay() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mounted]);
 
-  if (!showOverlay || !mounted) return null;
+  if (!showOverlay) return null;
 
   return (
     <div
@@ -199,172 +199,173 @@ export default function IntroOverlay() {
       style={{ background: '#0A0A0C' }}
       aria-label="AURA Introduction"
     >
-      {/* ── LEFT PANEL ── */}
-      <div
-        ref={panelLeftRef}
-        className="absolute top-0 left-0 h-full will-change-transform"
-        style={{ width: '50vw', background: '#0A0A0C', zIndex: 20 }}
-      />
-
-      {/* ── RIGHT PANEL ── */}
-      <div
-        ref={panelRightRef}
-        className="absolute top-0 right-0 h-full will-change-transform"
-        style={{ width: '50vw', background: '#0A0A0C', zIndex: 20 }}
-      />
-
-      {/* ── GOLD SEAM LIGHT ── */}
-      <div
-        ref={seamRef}
-        className="absolute top-0 left-1/2 -translate-x-1/2 h-full origin-center"
-        style={{
-          width: 2,
-          zIndex: 30,
-          background: 'linear-gradient(180deg, transparent 0%, #D4A02A 30%, #D4A02A 70%, transparent 100%)',
-          filter: 'blur(1px)',
-          boxShadow: '0 0 20px 8px rgba(212,160,42,0.6)',
-        }}
-      />
-
-      {/* ── INTRO CONTENT ── sits above panels, below seam */}
-      <div
-        ref={contentRef}
-        className="absolute inset-0 flex flex-col items-center justify-center"
-        style={{ zIndex: 25 }}
-      >
-        {/* Subtle gold radial glow on dark bg */}
+      <div style={{ opacity: mounted ? 1 : 0, width: '100%', height: '100%' }}>
+        {/* ── LEFT PANEL ── */}
         <div
-          className="absolute inset-0 pointer-events-none"
+          ref={panelLeftRef}
+          className="absolute top-0 left-0 h-full will-change-transform"
+          style={{ width: '50vw', background: '#0A0A0C', zIndex: 20 }}
+        />
+
+        {/* ── RIGHT PANEL ── */}
+        <div
+          ref={panelRightRef}
+          className="absolute top-0 right-0 h-full will-change-transform"
+          style={{ width: '50vw', background: '#0A0A0C', zIndex: 20 }}
+        />
+
+        {/* ── GOLD SEAM LIGHT ── */}
+        <div
+          ref={seamRef}
+          className="absolute top-0 left-1/2 -translate-x-1/2 h-full origin-center"
           style={{
-            background: 'radial-gradient(ellipse 55% 50% at 50% 50%, rgba(212,160,42,0.09) 0%, transparent 70%)',
+            width: 2,
+            zIndex: 30,
+            background: 'linear-gradient(180deg, transparent 0%, #D4A02A 30%, #D4A02A 70%, transparent 100%)',
+            filter: 'blur(1px)',
+            boxShadow: '0 0 20px 8px rgba(212,160,42,0.6)',
           }}
         />
 
-        {/* Ambient signature particles inside the glow */}
-        <AuraParticles variant="intro" />
-
-        <div className="relative flex flex-col items-center text-center select-none">
-
-          {/* ── MEDALLION ── */}
+        {/* ── INTRO CONTENT ── sits above panels, below seam */}
+        <div
+          ref={contentRef}
+          className="absolute inset-0 flex flex-col items-center justify-center"
+          style={{ zIndex: 25 }}
+        >
+          {/* Subtle gold radial glow on dark bg */}
           <div
-            className="intro-medallion relative mb-9 flex items-center justify-center"
-            style={{ width: 200, height: 200 }}
-          >
-            {/* Outer ring — white hairline */}
-            <div
-              ref={ring1Ref}
-              className="absolute rounded-full"
-              style={{ width: 200, height: 200, border: '1px solid rgba(255,255,255,0.28)' }}
-            />
-
-            {/* Middle ring — white hairline */}
-            <div
-              ref={ring2Ref}
-              className="absolute rounded-full"
-              style={{ width: 154, height: 154, border: '1px solid rgba(255,255,255,0.20)' }}
-            />
-
-            {/* Inner gold ring */}
-            <div
-              ref={ring3Ref}
-              className="absolute rounded-full"
-              style={{ width: 110, height: 110, border: '2px solid #D4A02A' }}
-            />
-
-            {/* Center "A" — gold */}
-            <div
-              className="relative z-10 flex items-center justify-center"
-              style={{ width: 90, height: 90 }}
-            >
-              <span
-                ref={centerARef}
-                className="font-serif font-bold"
-                style={{
-                  fontSize: 46,
-                  lineHeight: 1,
-                  letterSpacing: '-0.02em',
-                  color: '#D4A02A',
-                }}
-              >
-                A
-              </span>
-            </div>
-          </div>
-
-          {/* ── AURA WORDMARK — white ── */}
-          <h1
-            ref={wordmarkRef}
-            className="font-serif font-bold uppercase flex items-center"
+            className="absolute inset-0 pointer-events-none"
             style={{
-              fontSize: 'clamp(52px, 10vw, 88px)',
-              letterSpacing: '0.22em',
-              lineHeight: 1,
-              color: '#FFFFFF',
-            }}
-          >
-            <span className="intro-letter inline-block">A</span>
-            <span className="intro-letter inline-block">U</span>
-            <span className="intro-letter inline-block">R</span>
-            <span className="intro-letter inline-block">A</span>
-          </h1>
-
-          {/* ── GOLD DIVIDER ── */}
-          <div
-            ref={dividerRef}
-            className="origin-center mt-5 mb-5"
-            style={{
-              width: 110,
-              height: 1,
-              background: 'linear-gradient(90deg, transparent, #D4A02A, transparent)',
+              background: 'radial-gradient(ellipse 55% 50% at 50% 50%, rgba(212,160,42,0.09) 0%, transparent 70%)',
             }}
           />
 
-          {/* ── "THE BEGINNING" — gold ── */}
-          <p
-            ref={taglineRef}
-            className="font-sans font-black uppercase"
-            style={{ fontSize: 11, letterSpacing: '0.1em', color: '#D4A02A' }}
-          >
-            THE BEGINNING
-          </p>
+          {/* Ambient signature particles inside the glow */}
+          {mounted && <AuraParticles variant="intro" />}
 
-          {/* ── SUBTITLE — white/50% ── */}
-          <p
-            ref={subtitleRef}
-            className="font-sans uppercase mt-2"
+          <div className="relative flex flex-col items-center text-center select-none">
+            {/* ── MEDALLION ── */}
+            <div
+              className="intro-medallion relative mb-9 flex items-center justify-center"
+              style={{ width: 200, height: 200 }}
+            >
+              {/* Outer ring — white hairline */}
+              <div
+                ref={ring1Ref}
+                className="absolute rounded-full"
+                style={{ width: 200, height: 200, border: '1px solid rgba(255,255,255,0.28)' }}
+              />
+
+              {/* Middle ring — white hairline */}
+              <div
+                ref={ring2Ref}
+                className="absolute rounded-full"
+                style={{ width: 154, height: 154, border: '1px solid rgba(255,255,255,0.20)' }}
+              />
+
+              {/* Inner gold ring */}
+              <div
+                ref={ring3Ref}
+                className="absolute rounded-full"
+                style={{ width: 110, height: 110, border: '2px solid #D4A02A' }}
+              />
+
+              {/* Center "A" — gold */}
+              <div
+                className="relative z-10 flex items-center justify-center"
+                style={{ width: 90, height: 90 }}
+              >
+                <span
+                  ref={centerARef}
+                  className="font-serif font-bold"
+                  style={{
+                    fontSize: 46,
+                    lineHeight: 1,
+                    letterSpacing: '-0.02em',
+                    color: '#D4A02A',
+                  }}
+                >
+                  A
+                </span>
+              </div>
+            </div>
+
+            {/* ── AURA WORDMARK — white ── */}
+            <h1
+              ref={wordmarkRef}
+              className="font-serif font-bold uppercase flex items-center"
+              style={{
+                fontSize: 'clamp(52px, 10vw, 88px)',
+                letterSpacing: '0.22em',
+                lineHeight: 1,
+                color: '#FFFFFF',
+              }}
+            >
+              <span className="intro-letter inline-block">A</span>
+              <span className="intro-letter inline-block">U</span>
+              <span className="intro-letter inline-block">R</span>
+              <span className="intro-letter inline-block">A</span>
+            </h1>
+
+            {/* ── GOLD DIVIDER ── */}
+            <div
+              ref={dividerRef}
+              className="origin-center mt-5 mb-5"
+              style={{
+                width: 110,
+                height: 1,
+                background: 'linear-gradient(90deg, transparent, #D4A02A, transparent)',
+              }}
+            />
+
+            {/* ── "THE BEGINNING" — gold ── */}
+            <p
+              ref={taglineRef}
+              className="font-sans font-black uppercase"
+              style={{ fontSize: 11, letterSpacing: '0.1em', color: '#D4A02A' }}
+            >
+              THE BEGINNING
+            </p>
+
+            {/* ── SUBTITLE — white/50% ── */}
+            <p
+              ref={subtitleRef}
+              className="font-sans uppercase mt-2"
+              style={{
+                fontSize: 10,
+                letterSpacing: '0.38em',
+                fontWeight: 500,
+                color: 'rgba(255,255,255,0.45)',
+              }}
+            >
+              GIDC DAHEGAM · BOUTIQUE SHOWROOM
+            </p>
+          </div>
+        </div>
+
+        {/* ── SKIP BUTTON ── */}
+        {showSkip && (
+          <button
+            onClick={handleSkip}
+            className="absolute top-6 right-6 z-40 text-[10px] font-bold tracking-[0.25em] uppercase border px-4 py-1.5 rounded-full transition-all duration-200 cursor-pointer"
             style={{
-              fontSize: 10,
-              letterSpacing: '0.38em',
-              fontWeight: 500,
-              color: 'rgba(255,255,255,0.45)',
+              color: 'rgba(255,255,255,0.5)',
+              borderColor: 'rgba(255,255,255,0.2)',
+            }}
+            onMouseEnter={e => {
+              (e.currentTarget as HTMLElement).style.color = '#D4A02A';
+              (e.currentTarget as HTMLElement).style.borderColor = '#D4A02A';
+            }}
+            onMouseLeave={e => {
+              (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.5)';
+              (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.2)';
             }}
           >
-            GIDC DAHEGAM · BOUTIQUE SHOWROOM
-          </p>
-        </div>
+            SKIP
+          </button>
+        )}
       </div>
-
-      {/* ── SKIP BUTTON ── */}
-      {showSkip && (
-        <button
-          onClick={handleSkip}
-          className="absolute top-6 right-6 z-40 text-[10px] font-bold tracking-[0.25em] uppercase border px-4 py-1.5 rounded-full transition-all duration-200 cursor-pointer"
-          style={{
-            color: 'rgba(255,255,255,0.5)',
-            borderColor: 'rgba(255,255,255,0.2)',
-          }}
-          onMouseEnter={e => {
-            (e.currentTarget as HTMLElement).style.color = '#D4A02A';
-            (e.currentTarget as HTMLElement).style.borderColor = '#D4A02A';
-          }}
-          onMouseLeave={e => {
-            (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.5)';
-            (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.2)';
-          }}
-        >
-          SKIP
-        </button>
-      )}
     </div>
   );
 }
