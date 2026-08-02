@@ -54,8 +54,8 @@ export default function AdminSidebar() {
       </div>
 
       {/* Desktop Sidebar Panel */}
-      <aside className={`fixed md:static inset-y-0 left-0 z-50 w-64 bg-aura-surface border-r border-aura-line p-6 flex flex-col justify-between shrink-0 transition-transform duration-300 ${
-        mobileNavOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+      <aside className={`fixed md:sticky md:top-4 z-50 w-64 md:w-72 bg-aura-surface/80 backdrop-blur-2xl border-r md:border border-aura-line p-6 flex flex-col justify-between shrink-0 transition-transform duration-300 md:my-4 md:ml-4 md:rounded-3xl md:h-[calc(100vh-32px)] shadow-[0_8px_40px_rgb(0,0,0,0.08)] dark:shadow-[0_8px_40px_rgb(0,0,0,0.6)] ${
+        mobileNavOpen ? 'inset-y-0 left-0 translate-x-0' : 'inset-y-0 left-0 -translate-x-full md:translate-x-0'
       }`}>
         <div className="space-y-8">
           <div className="flex items-center justify-between border-b border-aura-line pb-4">
