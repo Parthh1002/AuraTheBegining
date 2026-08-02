@@ -39,9 +39,20 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     );
   }
 
-  // Prevent rendering the dashboard content if unauthorized
+  // If not authorized and trying to access a protected route
   if (!isAuthorized && pathname !== '/admin/login') {
-    return null; 
+    // Force a hard redirect if the router fails
+    if (typeof window !== 'undefined') {
+      window.location.href = '/admin/login';
+    }
+    return (
+      <div className="min-h-screen bg-[#0A0A0C] flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <Loader2 className="w-8 h-8 text-aura-gold animate-spin" />
+          <p className="text-aura-gold tracking-[0.2em] text-xs uppercase font-bold">Redirecting to Login...</p>
+        </div>
+      </div>
+    );
   }
 
   // If authorized, or if we are exactly on the login page (which handles its own state), render children
