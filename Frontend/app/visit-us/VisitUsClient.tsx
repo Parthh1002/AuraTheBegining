@@ -87,16 +87,37 @@ export default function VisitUsClient({
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <ScrollReveal direction="up" delay={0.1} className="lg:col-span-2 space-y-8">
-          <div className="bg-aura-panel border border-aura-line rounded-xl overflow-hidden shadow-2xl h-[500px] relative">
+          <div className="bg-aura-panel border border-aura-line rounded-xl overflow-hidden shadow-2xl h-[500px] relative group ring-1 ring-aura-gold/20">
+            {/* The Locked Map */}
             <iframe
               title="AURA (The Beginning) Exact Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1822.427329596637!2d72.8122976!3d23.1672323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e5b002c91dc13%3A0xc48c0a9693bb3644!2sAURA%20(The%20Beginning)!5e1!3m2!1sen!2sin!4v1719582991000!5m2!1sen!2sin&t=k"
+              src="https://maps.google.com/maps?q=23.16286593494573,72.80827951499718&t=k&hl=en&z=20&output=embed"
               width="100%"
               height="100%"
-              style={{ border: 0 }}
+              style={{ border: 0, filter: 'contrast(1.1) saturate(1.2)' }}
+              className="pointer-events-none scale-110" 
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />
+            
+            {/* Premium Custom Map Marker Highlight */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center pointer-events-none">
+              <div className="relative flex items-center justify-center">
+                {/* Ping / Glow animations */}
+                <div className="absolute w-16 h-16 bg-aura-gold/40 rounded-full animate-ping" />
+                <div className="absolute w-24 h-24 bg-aura-gold/20 rounded-full animate-pulse" />
+                {/* Center marker */}
+                <div className="relative w-12 h-12 bg-aura-surface backdrop-blur-md rounded-full border-2 border-aura-gold flex items-center justify-center shadow-[0_0_30px_rgba(212,160,42,0.8)]">
+                  <MapPin className="w-5 h-5 text-aura-gold fill-aura-gold/20" />
+                </div>
+              </div>
+              <div className="mt-3 bg-aura-surface backdrop-blur-md px-4 py-1.5 rounded-full border border-aura-gold/50 shadow-xl">
+                <span className="font-serif font-bold tracking-[0.2em] text-aura-ink text-[10px] uppercase">AURA MENS WEAR</span>
+              </div>
+            </div>
+            
+            {/* Overlay to block interaction but allow visual feedback */}
+            <div className="absolute inset-0 bg-aura-bg/5 pointer-events-none" />
           </div>
 
           <div className="flex flex-col sm:flex-row gap-6 bg-aura-elevated border border-aura-line rounded-xl p-6 shadow-md">
