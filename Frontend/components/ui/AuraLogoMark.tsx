@@ -6,10 +6,12 @@ type LogoVariant = 'light' | 'dark' | 'auto';
 
 export default function AuraLogoMark({ 
   className = 'w-10 h-10',
-  variant = 'auto'
+  variant = 'auto',
+  style
 }: { 
   className?: string;
   variant?: LogoVariant;
+  style?: React.CSSProperties;
 }) {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
 
@@ -43,6 +45,7 @@ export default function AuraLogoMark({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
+      style={style}
       aria-label="AURA Logo Emblem"
     >
       {/* NO white rect — fully transparent bg so it blends with any surface */}
