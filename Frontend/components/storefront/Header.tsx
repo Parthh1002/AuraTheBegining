@@ -54,11 +54,11 @@ export default function Header() {
             duration: 0.45,
             borderRadius: scrolled ? '100px' : '0px',
             width: scrolled ? '92%' : '100%',
-            maxWidth: scrolled ? '1100px' : '100%',
+            maxWidth: '100%',
             marginTop: scrolled ? '14px' : '0px',
             height: scrolled ? 64 : (window.innerWidth >= 768 ? 88 : 72),
-            paddingLeft: scrolled ? '28px' : (window.innerWidth >= 1200 ? '4vw' : '20px'),
-            paddingRight: scrolled ? '28px' : (window.innerWidth >= 1200 ? '4vw' : '20px'),
+            paddingLeft: scrolled ? '28px' : '24px',
+            paddingRight: scrolled ? '28px' : '24px',
             ease: 'power3.out',
           });
         }
@@ -68,8 +68,8 @@ export default function Header() {
     if (navContainerRef.current) {
       gsap.set(navContainerRef.current, {
         height: window.innerWidth >= 768 ? 88 : 72,
-        paddingLeft: window.innerWidth >= 1200 ? '4vw' : '20px',
-        paddingRight: window.innerWidth >= 1200 ? '4vw' : '20px',
+        paddingLeft: '24px',
+        paddingRight: '24px',
         width: '100%',
         maxWidth: '100%'
       });
