@@ -93,33 +93,33 @@ export default function EnquiriesAdminClient() {
         ) : enquiries.length > 0 ? (
           <div className="divide-y divide-[#D4A02A]/10">
             {enquiries.map((enq) => (
-              <div key={enq.id} className="p-6 space-y-4 hover:bg-aura-elevated/40 transition-colors">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2">
+              <div key={enq.id} className="p-4 sm:p-6 space-y-4 hover:bg-aura-elevated/40 transition-colors">
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 text-xs">
+                  <div className="space-y-2">
+                    <div className="flex flex-wrap items-center gap-2">
                       <span className="font-serif text-base font-bold text-aura-ink">
                         {enq.name || enq.phone || enq.email || 'Anonymous Customer'}
                       </span>
-                      <span className="text-[10px] bg-aura-elevated text-aura-gold px-2.5 py-0.5 rounded border border-aura-gold/20 font-mono">
+                      <span className="text-[10px] bg-aura-elevated text-aura-gold px-2.5 py-0.5 rounded border border-aura-gold/20 font-mono mt-0.5">
                         {enq.source}
                       </span>
                     </div>
 
-                    <div className="flex flex-wrap gap-4 text-aura-subink">
+                    <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 text-aura-subink">
                       {enq.phone && (
-                        <a href={`tel:${enq.phone}`} className="flex items-center gap-1 hover:text-aura-gold">
-                          <Phone className="w-3.5 h-3.5 text-aura-gold" /> {enq.phone}
+                        <a href={`tel:${enq.phone}`} className="flex items-center gap-1.5 hover:text-aura-gold">
+                          <Phone className="w-3.5 h-3.5 text-aura-gold shrink-0" /> <span className="truncate">{enq.phone}</span>
                         </a>
                       )}
                       {enq.email && (
-                        <a href={`mailto:${enq.email}`} className="flex items-center gap-1 hover:text-aura-gold">
-                          <Mail className="w-3.5 h-3.5 text-aura-gold" /> {enq.email}
+                        <a href={`mailto:${enq.email}`} className="flex items-center gap-1.5 hover:text-aura-gold">
+                          <Mail className="w-3.5 h-3.5 text-aura-gold shrink-0" /> <span className="truncate">{enq.email}</span>
                         </a>
                       )}
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto pt-3 sm:pt-0 border-t border-aura-gold/10 sm:border-0 mt-1 sm:mt-0">
                     <select
                       value={enq.status || 'new'}
                       onChange={(e) => updateStatus(enq.id, e.target.value)}
@@ -136,8 +136,8 @@ export default function EnquiriesAdminClient() {
                       <option value="closed" className="bg-aura-surface">Closed</option>
                     </select>
 
-                    <span className="text-[10px] text-aura-subink flex items-center gap-1">
-                      <Clock className="w-3 h-3" /> {new Date(enq.created_at).toLocaleString()}
+                    <span className="text-[10px] text-aura-subink flex items-center gap-1 shrink-0">
+                      <Clock className="w-3 h-3" /> {new Date(enq.created_at).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' })}
                     </span>
                   </div>
                 </div>

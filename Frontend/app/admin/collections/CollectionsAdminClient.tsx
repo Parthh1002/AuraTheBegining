@@ -168,8 +168,8 @@ export default function CollectionsAdminClient() {
       </div>
 
       {modalOpen && (
-        <div className="fixed inset-0 z-50 bg-aura-bg/90 backdrop-blur-md flex items-start justify-center p-4 pt-10 pb-10 overflow-y-auto" data-lenis-prevent="true">
-          <div className="w-full max-w-md bg-aura-surface border border-aura-gold/30 rounded-2xl p-6 space-y-6 relative shadow-2xl my-auto shrink-0">
+        <div className="fixed inset-0 z-50 bg-aura-bg/95 sm:bg-aura-bg/90 sm:backdrop-blur-md flex flex-col sm:items-center sm:justify-center sm:p-4 overflow-hidden" data-lenis-prevent="true">
+          <div className="w-full h-[100dvh] sm:h-auto sm:max-h-[85vh] sm:max-w-md bg-aura-surface sm:border border-aura-gold/30 sm:rounded-2xl p-6 pb-24 sm:pb-8 sm:p-8 space-y-6 relative shadow-2xl shrink-0 overflow-y-auto">
             <button onClick={() => setModalOpen(false)} className="absolute top-4 right-4 text-aura-subink hover:text-aura-ink">
               <X className="w-5 h-5" />
             </button>
@@ -227,13 +227,15 @@ export default function CollectionsAdminClient() {
                 </div>
               </div>
 
-              <button
-                type="submit"
-                disabled={saving}
-                className="w-full bg-aura-gold text-aura-bg font-bold text-xs uppercase tracking-widest py-3.5 rounded hover:bg-aura-gold-soft transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-lg mt-4"
-              >
-                {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />} Save Collection
-              </button>
+              <div className="fixed bottom-0 left-0 right-0 p-4 bg-aura-surface/90 backdrop-blur-md border-t border-aura-gold/20 sm:static sm:bg-transparent sm:backdrop-blur-none sm:border-0 sm:p-0 z-10">
+                <button
+                  type="submit"
+                  disabled={saving}
+                  className="w-full bg-aura-gold text-aura-bg font-bold text-xs uppercase tracking-widest py-3.5 rounded hover:bg-aura-gold-soft transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+                >
+                  {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />} Save Collection
+                </button>
+              </div>
             </form>
           </div>
         </div>
