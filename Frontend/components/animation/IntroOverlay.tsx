@@ -9,6 +9,7 @@ export default function IntroOverlay() {
   const [showSkip,    setShowSkip]    = useState(false);
   const [mounted,     setMounted]     = useState(false);
 
+
   /* ── refs ───────────────────────────────────────── */
   const containerRef  = useRef<HTMLDivElement>(null);
   const contentRef    = useRef<HTMLDivElement>(null);
