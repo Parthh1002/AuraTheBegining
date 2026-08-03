@@ -54,11 +54,11 @@ export default function Header() {
             duration: 0.45,
             borderRadius: scrolled ? '100px' : '0px',
             width: scrolled ? '92%' : '100%',
-            maxWidth: scrolled ? '1100px' : '1400px',
+            maxWidth: scrolled ? '1100px' : '100%',
             marginTop: scrolled ? '14px' : '0px',
             height: scrolled ? 64 : (window.innerWidth >= 768 ? 88 : 72),
-            paddingLeft: scrolled ? '28px' : '20px',
-            paddingRight: scrolled ? '28px' : '20px',
+            paddingLeft: scrolled ? '28px' : (window.innerWidth >= 1200 ? '4vw' : '20px'),
+            paddingRight: scrolled ? '28px' : (window.innerWidth >= 1200 ? '4vw' : '20px'),
             ease: 'power3.out',
           });
         }
@@ -68,10 +68,10 @@ export default function Header() {
     if (navContainerRef.current) {
       gsap.set(navContainerRef.current, {
         height: window.innerWidth >= 768 ? 88 : 72,
-        paddingLeft: '20px',
-        paddingRight: '20px',
+        paddingLeft: window.innerWidth >= 1200 ? '4vw' : '20px',
+        paddingRight: window.innerWidth >= 1200 ? '4vw' : '20px',
         width: '100%',
-        maxWidth: '1400px'
+        maxWidth: '100%'
       });
     }
     return () => window.removeEventListener('scroll', handleScroll);
