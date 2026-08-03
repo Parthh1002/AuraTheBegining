@@ -41,7 +41,7 @@ export default function CollectionsClient({
     const fetchLatest = async () => {
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/collections`,
+          `${process.env.NEXT_PUBLIC_API_URL || 'https://aurathebegining.onrender.com/api'}/collections`,
           { cache: 'no-store' }
         );
         if (res.ok) {
