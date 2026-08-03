@@ -3,7 +3,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, SlidersHorizontal, Sparkles, Search, X } from 'lucide-react';
+import { ArrowRight, SlidersHorizontal, Sparkles, Search, X, Crown, Briefcase, Zap, Leaf, LayoutGrid } from 'lucide-react';
 import ScrollReveal from '@/components/animation/ScrollReveal';
 import EmptyState from '@/components/ui/EmptyState';
 
@@ -19,11 +19,11 @@ interface Collection {
 }
 
 const CATEGORY_FILTERS = [
-  { key: 'all', label: 'All', icon: '✦' },
-  { key: 'wedding', label: 'Wedding & Ethnic', icon: '👑' },
-  { key: 'formals', label: 'Formals & Suits', icon: '🤵' },
-  { key: 'genz', label: 'Gen-Z & Streetwear', icon: '🔥' },
-  { key: 'casual', label: 'Casual & Linen', icon: '🌿' },
+  { key: 'all',     label: 'All',                Icon: LayoutGrid },
+  { key: 'wedding', label: 'Wedding & Ethnic',   Icon: Crown      },
+  { key: 'formals', label: 'Formals & Suits',    Icon: Briefcase  },
+  { key: 'genz',    label: 'Gen-Z & Streetwear', Icon: Zap        },
+  { key: 'casual',  label: 'Casual & Linen',     Icon: Leaf       },
 ];
 
 export default function CollectionsClient({
@@ -118,6 +118,7 @@ export default function CollectionsClient({
             {CATEGORY_FILTERS.map((cat) => {
               const isActive = activeFilter === cat.key;
               const count = categoryCounts[cat.key] || 0;
+              const Icon = cat.Icon;
               return (
                 <button
                   key={cat.key}
@@ -128,7 +129,7 @@ export default function CollectionsClient({
                       : 'bg-aura-elevated/80 text-aura-cream hover:bg-aura-elevated hover:text-aura-gold border border-aura-line/50'
                   }`}
                 >
-                  <span>{cat.icon}</span>
+                  <Icon className="w-3.5 h-3.5 shrink-0" />
                   <span>{cat.label}</span>
                   <span
                     className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold ${
