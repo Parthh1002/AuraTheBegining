@@ -3,7 +3,48 @@
 import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, SlidersHorizontal, Sparkles, Search, X, Crown, Briefcase, Zap, Leaf, LayoutGrid } from 'lucide-react';
+import { ArrowRight, SlidersHorizontal, Sparkles, Search, X } from 'lucide-react';
+
+/* ── Custom luxury SVG symbols ── */
+const IconAll = () => (
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <line x1="7" y1="1" x2="7" y2="13" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
+    <line x1="1" y1="7" x2="13" y2="7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
+    <line x1="2.52" y1="2.52" x2="11.48" y2="11.48" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
+    <line x1="11.48" y1="2.52" x2="2.52" y2="11.48" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
+  </svg>
+);
+
+const IconWedding = () => (
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M7 1L8.2 4.5H12L9 6.7L10.2 10.2L7 8L3.8 10.2L5 6.7L2 4.5H5.8L7 1Z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round"/>
+    <circle cx="7" cy="7" r="1.2" fill="currentColor" opacity="0.5"/>
+  </svg>
+);
+
+const IconFormals = () => (
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5 1.5L7 4L9 1.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M5 1.5L3.5 5H10.5L9 1.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M5.5 5L7 12.5L8.5 5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+const IconGenZ = () => (
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8.5 1.5L4 7.5H7.5L5.5 12.5L10 6.5H6.5L8.5 1.5Z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+const IconCasual = () => (
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M7 2C7 2 4 4.5 4 7C4 9.2 5.8 11 7 11" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+    <path d="M7 2C7 2 10 4.5 10 7C10 9.2 8.2 11 7 11" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+    <path d="M4.5 5.5C5.5 6 6.5 6 7.5 5.5" stroke="currentColor" strokeWidth="1" strokeLinecap="round"/>
+    <path d="M4 8C5 8.5 6 8.5 7.5 8" stroke="currentColor" strokeWidth="1" strokeLinecap="round"/>
+    <line x1="7" y1="11" x2="7" y2="13" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+  </svg>
+);
 import ScrollReveal from '@/components/animation/ScrollReveal';
 import EmptyState from '@/components/ui/EmptyState';
 
@@ -19,11 +60,11 @@ interface Collection {
 }
 
 const CATEGORY_FILTERS = [
-  { key: 'all',     label: 'All',                Icon: LayoutGrid },
-  { key: 'wedding', label: 'Wedding & Ethnic',   Icon: Crown      },
-  { key: 'formals', label: 'Formals & Suits',    Icon: Briefcase  },
-  { key: 'genz',    label: 'Gen-Z & Streetwear', Icon: Zap        },
-  { key: 'casual',  label: 'Casual & Linen',     Icon: Leaf       },
+  { key: 'all',     label: 'All',                Icon: IconAll     },
+  { key: 'wedding', label: 'Wedding & Ethnic',   Icon: IconWedding },
+  { key: 'formals', label: 'Formals & Suits',    Icon: IconFormals },
+  { key: 'genz',    label: 'Gen-Z & Streetwear', Icon: IconGenZ    },
+  { key: 'casual',  label: 'Casual & Linen',     Icon: IconCasual  },
 ];
 
 export default function CollectionsClient({
