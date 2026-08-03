@@ -281,63 +281,94 @@ export default function Header() {
         </div>
       )}
 
-      {/* ── SEARCH MODAL ── */}
+      {/* ── SEARCH MODAL — Full-screen on mobile, centered card on desktop ── */}
       {searchOpen && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center pt-24 px-4"
+        <div
+          className="fixed inset-0 z-50 flex flex-col sm:items-start sm:justify-center sm:pt-24 sm:px-4"
           style={{
-            background: 'rgba(10,10,12,0.85)',
-            backdropFilter: 'blur(16px)',
-            WebkitBackdropFilter: 'blur(16px)',
+            background: 'rgba(10,10,12,0.92)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
           }}
+          onClick={(e) => { if (e.target === e.currentTarget) setSearchOpen(false); }}
         >
-          <div className="w-full max-w-2xl rounded-2xl p-6 shadow-2xl relative"
+          {/* Mobile: full-screen panel */}
+          <div
+            className="w-full h-full sm:h-auto sm:max-w-2xl sm:rounded-2xl flex flex-col"
             style={{
-              background: 'rgba(255,255,255,0.08)',
-              backdropFilter: 'blur(24px)',
-              border: '1px solid rgba(255,255,255,0.15)',
+              background: 'rgba(18,18,22,0.98)',
+              borderBottom: '1px solid rgba(255,255,255,0.1)',
+              borderTop: 'none',
             }}
           >
-            <button
-              onClick={() => setSearchOpen(false)}
-              className="absolute top-4 right-4 text-white/60 hover:text-white w-8 h-8 flex items-center justify-center cursor-pointer rounded-full hover:bg-white/10 transition-colors"
-            >
-              <X className="w-5 h-5" />
-            </button>
-
-            <h3 className="font-serif text-xl text-white mb-4">Search AURA Collections</h3>
-
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                if (searchQuery.trim()) {
-                  window.location.href = `/search?q=${encodeURIComponent(searchQuery.trim())}`;
-                  setSearchOpen(false);
-                }
-              }}
-              className="flex gap-2"
-            >
-              <input
-                type="text"
-                placeholder="Search by suit, sherwani, bandhgala, fabric..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                autoFocus
-                className="flex-1 px-4 py-3 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#D4A02A] placeholder:text-white/40 text-white"
-                style={{
-                  background: 'rgba(255,255,255,0.07)',
-                  border: '1px solid rgba(255,255,255,0.15)',
-                }}
-              />
+            {/* Header */}
+            <div className="flex items-center justify-between px-5 py-4 border-b border-white/10 sm:rounded-t-2xl">
+              <h3 className="font-serif text-lg text-white">Search Collections</h3>
               <button
-                type="submit"
-                className="bg-[#D4A02A] text-[#0A0A0C] px-6 py-3 font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-[#E8B84B] transition-colors cursor-pointer"
+                onClick={() => setSearchOpen(false)}
+                className="w-10 h-10 flex items-center justify-center rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
               >
-                Search
+                <X className="w-5 h-5" />
               </button>
-            </form>
+            </div>
+
+            {/* Search Form */}
+            <div className="p-5">
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (searchQuery.trim()) {
+                    window.location.href = `/search?q=${encodeURIComponent(searchQuery.trim())}`;
+                    setSearchOpen(false);
+                  }
+                }}
+                className="flex flex-col sm:flex-row gap-3"
+              >
+                <div className="relative flex-1">
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
+                  <input
+                    type="search"
+                    inputMode="search"
+                    placeholder="Suit, sherwani, bandhgala, fabric..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    autoFocus
+                    className="w-full pl-11 pr-4 py-4 rounded-xl text-base sm:text-sm focus:outline-none focus:ring-1 focus:ring-[#D4A02A] placeholder:text-white/30 text-white"
+                    style={{
+                      background: 'rgba(255,255,255,0.07)',
+                      border: '1px solid rgba(255,255,255,0.15)',
+                      fontSize: '16px', // prevents iOS zoom
+                    }}
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="bg-[#D4A02A] text-[#0A0A0C] px-8 py-4 font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-[#E8B84B] transition-colors cursor-pointer w-full sm:w-auto"
+                >
+                  Search
+                </button>
+              </form>
+
+              {/* Quick suggestions */}
+              <div className="mt-5">
+                <p className="text-[10px] text-white/35 uppercase tracking-widest mb-3 font-semibold">Popular Searches</p>
+                <div className="flex flex-wrap gap-2">
+                  {['Sherwani', 'Double Breasted', 'Kurta Set', 'Slim Fit Suit', 'Bandhgala'].map((s) => (
+                    <button
+                      key={s}
+                      onClick={() => setSearchQuery(s)}
+                      className="text-xs px-3 py-1.5 rounded-full border border-white/15 text-white/50 hover:text-[#D4A02A] hover:border-[#D4A02A]/40 transition-colors cursor-pointer"
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
+
     </>
   );
 }
