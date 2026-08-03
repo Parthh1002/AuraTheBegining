@@ -174,7 +174,7 @@ export default function ProductDetailClient({
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-16 py-12 space-y-16">
+    <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-16 py-12 pb-32 sm:pb-12 space-y-16">
       <nav className="text-xs text-aura-muted flex items-center gap-2">
         <Link href="/" className="hover:text-aura-gold">Home</Link>
         <span>/</span>
@@ -286,9 +286,9 @@ export default function ProductDetailClient({
             </div>
           </div>
 
-          <div className="pt-4 flex flex-col sm:flex-row items-center gap-4 border-t border-aura-line">
+          <div className="pt-4 hidden sm:flex flex-row items-center gap-4 border-t border-aura-line">
             {product.in_stock ? (
-              <MagneticButton className="w-full sm:w-auto flex-1">
+              <MagneticButton className="w-auto flex-1">
                 <button
                   onClick={handleWhatsAppEnquiry}
                   disabled={isLoggingEnquiry}
@@ -300,7 +300,7 @@ export default function ProductDetailClient({
             ) : (
               <button
                 onClick={() => setNotifyModalOpen(true)}
-                className="w-full sm:w-auto flex-1 bg-aura-elevated text-aura-cream border border-aura-line font-bold text-xs uppercase tracking-[0.2em] px-8 py-4 rounded hover:bg-aura-gold hover:text-[#0A0A0C] transition-all inline-flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                className="w-auto flex-1 bg-aura-elevated text-aura-cream border border-aura-line font-bold text-xs uppercase tracking-[0.2em] px-8 py-4 rounded hover:bg-aura-gold hover:text-[#0A0A0C] transition-all inline-flex items-center justify-center gap-2 cursor-pointer shadow-md"
               >
                 <Bell className="w-4 h-4" /> Notify Me When Available
               </button>
@@ -384,6 +384,45 @@ export default function ProductDetailClient({
           </div>
         </div>
       )}
+
+      {/* Sticky Mobile CTA Bar */}
+      <div className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-aura-panel/95 backdrop-blur-md border-t border-aura-line p-4 safe-area-pb shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex flex-col">
+            <span className="text-[10px] text-aura-muted uppercase tracking-wider font-bold">Total Price</span>
+            <span className="font-serif text-sm text-aura-gold font-bold">{formatPrice(product.price_label)}</span>
+          </div>
+          <div className="flex items-center gap-3 flex-1 justify-end">
+            <button
+              onClick={toggleWishlist}
+              className={`p-3 rounded border transition-all cursor-pointer shrink-0 ${
+                isWishlisted
+                  ? 'bg-aura-gold/15 border-aura-gold text-aura-gold'
+                  : 'bg-aura-panel border-aura-line text-aura-cream hover:text-aura-gold'
+              }`}
+              aria-label="Wishlist Toggle"
+            >
+              <Heart className={`w-5 h-5 ${isWishlisted ? 'fill-aura-gold' : ''}`} />
+            </button>
+            {product.in_stock ? (
+              <button
+                onClick={handleWhatsAppEnquiry}
+                disabled={isLoggingEnquiry}
+                className="bg-aura-gold text-[#0A0A0C] font-bold text-[10px] sm:text-xs uppercase tracking-widest px-4 py-3 rounded hover:bg-aura-gold-soft transition-all shadow-md inline-flex items-center justify-center gap-2 cursor-pointer flex-1"
+              >
+                <MessageSquare className="w-3.5 h-3.5" /> Enquire
+              </button>
+            ) : (
+              <button
+                onClick={() => setNotifyModalOpen(true)}
+                className="bg-aura-elevated text-aura-cream border border-aura-line font-bold text-[10px] uppercase tracking-widest px-4 py-3 rounded hover:bg-aura-gold hover:text-[#0A0A0C] transition-all inline-flex items-center justify-center gap-2 cursor-pointer shadow-md flex-1"
+              >
+                <Bell className="w-3.5 h-3.5" /> Notify Me
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
 
       {relatedProducts.length > 0 && (
         <div className="space-y-8 pt-8 border-t border-aura-line">

@@ -214,3 +214,79 @@
 .section-gap-lg  { padding-top: 64px;  padding-bottom: 64px;  }
 .section-gap-md  { padding-top: 48px;  padding-bottom: 48px;  }
 .section-gap-sm  { padding-top: 24px;  padding-bottom: 24px;  }
+
+/* ════════════════════════════════════════════
+   FLUID TYPOGRAPHY — clamp() scale
+   Prevents awkward fixed-breakpoint size jumps
+   ════════════════════════════════════════════ */
+.text-fluid-h1  { font-size: clamp(2rem,   6vw,  4.5rem); line-height: 1.1; }
+.text-fluid-h2  { font-size: clamp(1.5rem, 4vw,  3rem);   line-height: 1.2; }
+.text-fluid-h3  { font-size: clamp(1.2rem, 3vw,  2rem);   line-height: 1.25; }
+.text-fluid-lg  { font-size: clamp(1rem,   2vw,  1.25rem); }
+.text-fluid-sm  { font-size: clamp(0.8rem, 1.5vw, 0.875rem); }
+
+/* ════════════════════════════════════════════
+   SAFE AREA INSETS — iOS notch / home bar
+   ════════════════════════════════════════════ */
+.pb-safe { padding-bottom: max(env(safe-area-inset-bottom), 12px); }
+.pt-safe { padding-top:    max(env(safe-area-inset-top), 12px); }
+.pl-safe { padding-left:   max(env(safe-area-inset-left), 0px); }
+.pr-safe { padding-right:  max(env(safe-area-inset-right), 0px); }
+
+/* Sticky bottom bar — full-width, safe-area aware */
+.sticky-cta-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 35;
+  padding-bottom: max(env(safe-area-inset-bottom), 12px);
+  padding-left:  max(env(safe-area-inset-left),  16px);
+  padding-right: max(env(safe-area-inset-right), 16px);
+}
+
+/* ════════════════════════════════════════════
+   TOUCH TARGETS — 44×44px min hit area
+   ════════════════════════════════════════════ */
+.touch-target {
+  min-width:  44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ════════════════════════════════════════════
+   NO HORIZONTAL OVERFLOW GUARD
+   ════════════════════════════════════════════ */
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Scrollbar hidden utility */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ════════════════════════════════════════════
+   MOBILE BOTTOM-SHEET ANIMATION
+   ════════════════════════════════════════════ */
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+.sheet-enter { animation: slideUp 0.32s cubic-bezier(0.32,0.72,0,1) forwards; }
+
+/* ════════════════════════════════════════════
+   MOBILE RESPONSIVE SECTION RHYTHM
+   ════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  .section-gap-xl { padding-top: 56px; padding-bottom: 56px; }
+  .section-gap-lg { padding-top: 40px; padding-bottom: 40px; }
+  .section-gap-md { padding-top: 32px; padding-bottom: 32px; }
+  .section-gap-sm { padding-top: 20px; padding-bottom: 20px; }
+
+  /* Prevent any inline scroll from causing horizontal bleed */
+  .overflow-x-auto { -webkit-overflow-scrolling: touch; }
+}
+

@@ -132,20 +132,20 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-aura-void/90 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto transition-opacity duration-300">
-      <div className="w-full max-w-4xl bg-aura-panel border border-aura-line rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.6)] relative my-8 max-h-[90vh] flex flex-col md:flex-row animate-premium-popup">
+    <div className="fixed inset-0 z-50 bg-aura-void/90 backdrop-blur-md flex items-center justify-center p-0 sm:p-4 overflow-y-auto transition-opacity duration-300">
+      <div className="w-full h-full sm:h-auto max-w-4xl bg-aura-panel sm:border border-aura-line sm:rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.6)] relative sm:my-8 max-h-[100vh] sm:max-h-[90vh] flex flex-col md:flex-row animate-premium-popup">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-20 p-2 rounded-full bg-aura-void/80 text-aura-cream hover:text-aura-gold border border-aura-line transition-colors cursor-pointer"
+          className="absolute top-4 right-4 z-20 p-2 rounded-full bg-aura-void/80 text-aura-cream hover:text-aura-gold border border-aura-line transition-colors cursor-pointer shadow-lg"
           aria-label="Close Quick View"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Left: Model Fit Image Gallery */}
-        <div className="w-full md:w-1/2 bg-aura-elevated p-6 flex flex-col items-center justify-center relative">
-          <div className="relative w-full aspect-[3/4] rounded-xl overflow-hidden border border-aura-line shadow-lg group">
+        <div className="w-full h-[50vh] sm:h-auto md:w-1/2 bg-aura-elevated p-4 sm:p-6 flex flex-col items-center justify-center relative shrink-0">
+          <div className="relative w-full h-full sm:aspect-[3/4] rounded-xl overflow-hidden border border-aura-line shadow-lg group">
             <Image
               src={selectedImage}
               alt={`${product.name} - Size ${selectedSize}`}

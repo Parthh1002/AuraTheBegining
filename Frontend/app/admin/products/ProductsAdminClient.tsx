@@ -212,7 +212,8 @@ export default function ProductsAdminClient() {
       </div>
 
       <div className="bg-aura-surface border border-aura-gold/20 rounded-xl overflow-hidden shadow-xl">
-        <div className="overflow-x-auto">
+        {/* Desktop Table View */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-left text-xs text-aura-ink">
             <thead className="bg-aura-elevated text-aura-gold uppercase tracking-wider text-[10px] border-b border-aura-gold/15">
               <tr>
@@ -279,6 +280,64 @@ export default function ProductsAdminClient() {
               )}
             </tbody>
           </table>
+        </div>
+
+        {/* Mobile Stacked Card View */}
+        <div className="block md:hidden divide-y divide-[#D4A02A]/10">
+          {loading ? (
+            <p className="p-8 text-center text-xs text-aura-subink">Loading catalog...</p>
+          ) : filteredProducts.length > 0 ? (
+            filteredProducts.map((p) => {
+              const primaryImg = p.product_images?.find((i: any) => i.is_primary)?.storage_path || p.product_images?.[0]?.storage_path;
+              return (
+                <div key={p.id} className="p-4 space-y-3 hover:bg-aura-elevated/50 transition-colors">
+                  <div className="flex items-center gap-3">
+                    <div className="relative w-12 h-16 rounded overflow-hidden bg-aura-elevated shrink-0 border border-aura-gold/20">
+                      {primaryImg && <Image src={primaryImg} alt={p.name} fill className="object-cover" />}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-bold text-aura-ink text-sm truncate">{p.name}</h3>
+                      <div className="text-[10px] text-aura-subink flex items-center gap-1.5 mt-0.5 truncate">
+                        <span className="font-mono text-aura-gold-soft truncate">{p.sku || '-'}</span>
+                        <span>•</span>
+                        <span className="truncate">{p.collection_name || 'Uncategorized'}</span>
+                      </div>
+                      {p.is_featured && (
+                        <span className="inline-block mt-1 text-[9px] text-aura-gold font-sans uppercase">★ Featured</span>
+                      )}
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between pt-2 border-t border-aura-gold/10">
+                    <div className="flex flex-col gap-1">
+                      <span className="text-xs font-semibold text-aura-ink">{p.price_label}</span>
+                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase inline-flex self-start ${
+                        p.in_stock ? 'bg-emerald-950 text-emerald-300' : 'bg-red-950 text-red-300'
+                      }`}>
+                        {p.in_stock ? 'In Stock' : 'Out of Stock'}
+                      </span>
+                    </div>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => openEditModal(p)}
+                        className="p-2 bg-aura-elevated hover:text-aura-gold rounded border border-aura-gold/20"
+                      >
+                        <Edit3 className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteProduct(p.id)}
+                        className="p-2 bg-aura-elevated hover:text-red-400 rounded border border-red-500/20"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <p className="p-8 text-center text-xs text-aura-subink">No products found matching criteria.</p>
+          )}
         </div>
       </div>
 
