@@ -13,7 +13,7 @@ export default function SettingsAdminClient() {
   const [formData, setFormData] = useState({
     store_phone: '+91 88660 77505',
     whatsapp_number: '918866077505',
-    store_address: 'Shop no 2, plot, Akshay Khanna's Store for only Men's, Sri Ram Tiles Industries Compound, opposite Balmukund Prime, GIDC, Dahegam, Gujarat 382305',
+    store_address: "Shop no 2, plot, Akshay Khanna's Store for only Men's, Sri Ram Tiles Industries Compound, opposite Balmukund Prime, GIDC, Dahegam, Gujarat 382305",
     hero_headline: 'Elegance Emerges from Darkness',
     hero_subtext: 'Discover bespoke tailoring, royal silk sherwanis, obsidian bandhgalas, and modern luxury apparel.',
     hero_media_url: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1920&auto=format&fit=crop',

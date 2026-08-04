@@ -13,7 +13,7 @@ export interface SendEmailPayload {
 export async function sendTransactionalEmail(payload: SendEmailPayload) {
   const apiKey = process.env.BREVO_API_KEY;
   const senderEmail = process.env.BREVO_SENDER_EMAIL || 'info@auramenswear.com';
-  const senderName = 'Akshay Khanna's Store for only Men's';
+  const senderName = "Akshay Khanna's Store for only Men's";
 
   if (!apiKey) {
     console.warn('BREVO_API_KEY is not configured. Email notification skipped.');
@@ -86,7 +86,7 @@ export async function sendCustomerAutoReply(customerEmail: string, customerName:
   return sendTransactionalEmail({
     toEmail: customerEmail,
     toName: customerName,
-    subject: 'Thank you for contacting Akshay Khanna's Store for only Men's',
+    subject: "Thank you for contacting Akshay Khanna's Store for only Men's",
     htmlContent,
   });
 }

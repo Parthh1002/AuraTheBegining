@@ -27,7 +27,7 @@ export default async function AboutPage() {
   const instagramHandle = '@aura_the_beginning';
   const instagramUrl = settings?.instagram_url || 'https://instagram.com';
   const whatsappNum = settings?.whatsapp_number || '918866077505';
-  const storeAddress = settings?.store_address || 'Shop no 2, plot, Akshay Khanna's Store for only Men's, Sri Ram Tiles Industries Compound, opposite Balmukund Prime, GIDC, Dahegam, Gujarat 382305';
+  const storeAddress = settings?.store_address || "Shop no 2, plot, Akshay Khanna's Store for only Men's, Sri Ram Tiles Industries Compound, opposite Balmukund Prime, GIDC, Dahegam, Gujarat 382305";
   const whatsappUrl = buildGeneralWhatsAppUrl(whatsappNum);
   const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(storeAddress)}`;
 
