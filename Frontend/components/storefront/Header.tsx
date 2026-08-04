@@ -275,7 +275,7 @@ export default function Header() {
               <MapPin className="w-4 h-4 text-[#D4A02A]" /> GIDC, Dahegam, Gujarat
             </p>
             <p className="text-[11px] text-white/50 flex items-center gap-3 uppercase tracking-widest">
-              <Phone className="w-4 h-4 text-[#D4A02A]" /> +91 98765 43210
+              <Phone className="w-4 h-4 text-[#D4A02A]" /> +91 88660 77505
             </p>
           </div>
         </div>

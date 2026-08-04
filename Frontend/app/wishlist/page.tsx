@@ -12,7 +12,7 @@ import { buildProductWhatsAppUrl } from '@/lib/whatsapp';
 export default function WishlistPage() {
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [whatsappNum, setWhatsappNum] = useState('919876543210');
+  const [whatsappNum, setWhatsappNum] = useState('918866077505');
 
   useEffect(() => {
     const fetchWishlistProducts = async () => {

@@ -18,7 +18,7 @@ export function buildProductWhatsAppUrl({
   priceLabel,
 }: WhatsAppProductParams): string {
   // Clean phone number: remove spaces, +, dashes
-  const cleanNumber = (whatsappNumber || '919876543210').replace(/[^\d]/g, '');
+  const cleanNumber = (whatsappNumber || '918866077505').replace(/[^\d]/g, '');
 
   let message = `Hi, I'm interested in ${productName}`;
   if (size) {
@@ -36,7 +36,7 @@ export function buildProductWhatsAppUrl({
 }
 
 export function buildGeneralWhatsAppUrl(whatsappNumber: string, customMessage?: string): string {
-  const cleanNumber = (whatsappNumber || '919876543210').replace(/[^\d]/g, '');
-  const message = customMessage || `Hi AURA (The Beginning), I would like to inquire about bespoke tailoring and visiting your boutique store in Dahegam.`;
+  const cleanNumber = (whatsappNumber || '918866077505').replace(/[^\d]/g, '');
+  const message = customMessage || `Hi Akshay Khanna's Store for only Men's, I would like to inquire about bespoke tailoring and visiting your boutique store in Dahegam.`;
   return `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
 }

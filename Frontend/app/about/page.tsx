@@ -26,8 +26,8 @@ export default async function AboutPage() {
 
   const instagramHandle = '@aura_the_beginning';
   const instagramUrl = settings?.instagram_url || 'https://instagram.com';
-  const whatsappNum = settings?.whatsapp_number || '919876543210';
-  const storeAddress = settings?.store_address || 'Shop no 2, plot, AURA (The Beginning), Sri Ram Tiles Industries Compound, opposite Balmukund Prime, GIDC, Dahegam, Gujarat 382305';
+  const whatsappNum = settings?.whatsapp_number || '918866077505';
+  const storeAddress = settings?.store_address || 'Shop no 2, plot, Akshay Khanna's Store for only Men's, Sri Ram Tiles Industries Compound, opposite Balmukund Prime, GIDC, Dahegam, Gujarat 382305';
   const whatsappUrl = buildGeneralWhatsAppUrl(whatsappNum);
   const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(storeAddress)}`;
 
@@ -124,7 +124,7 @@ export default async function AboutPage() {
           </div>
           <h1 className="font-serif text-4xl sm:text-6xl font-bold text-aura-cream">Light Emerging from Darkness</h1>
           <p className="text-sm text-aura-muted leading-relaxed max-w-2xl mx-auto font-medium">
-            &ldquo;AURA — The Beginning&rdquo; was established with a singular vision: crafting bespoke royal menswear for grooms, gentlemen, and young men (20+) who appreciate fine tailoring, rich fabrics, and timeless dignity.
+            &ldquo;Akshay Khanna's Store for only Men's&rdquo; was established with a singular vision: crafting bespoke royal menswear for grooms, gentlemen, and young men (20+) who appreciate fine tailoring, rich fabrics, and timeless dignity.
           </p>
         </div>
       </section>
@@ -200,7 +200,7 @@ export default async function AboutPage() {
               >
                 <Play className="w-8 h-8 sm:w-10 sm:h-10 fill-current ml-1" />
               </a>
-              <h3 className="font-serif text-xl sm:text-2xl font-bold text-white">AURA (The Beginning) — Official Showcase Video</h3>
+              <h3 className="font-serif text-xl sm:text-2xl font-bold text-white">Akshay Khanna's Store for only Men's — Official Showcase Video</h3>
               <p className="text-xs text-gray-300 mt-1">Watch on Instagram & Store Lounge Screens</p>
             </div>
           </div>
@@ -303,7 +303,7 @@ export default async function AboutPage() {
             <span className="text-xs font-sans tracking-[0.3em] text-aura-gold uppercase font-bold">FOUNDER & MASTER ARTISANS</span>
             <h2 className="font-serif text-3xl font-bold text-aura-cream">Parth Patel & Master Tailors</h2>
             <p className="text-xs text-aura-muted leading-relaxed">
-              Our founder Parth Patel created AURA (The Beginning) to give grooms and men in Dahegam and across Gujarat an international bespoke tailoring experience without compromising on authentic heritage craftsmanship.
+              Our founder Parth Patel created Akshay Khanna's Store for only Men's to give grooms and men in Dahegam and across Gujarat an international bespoke tailoring experience without compromising on authentic heritage craftsmanship.
             </p>
 
             <div className="space-y-2 text-xs pt-2 border-t border-aura-line">
@@ -313,7 +313,7 @@ export default async function AboutPage() {
               </p>
               <p className="flex items-center gap-2 text-aura-cream">
                 <Phone className="w-4 h-4 text-aura-gold shrink-0" />
-                <span>Phone / WhatsApp: +91 98765 43210</span>
+                <span>Phone / WhatsApp: +91 88660 77505</span>
               </p>
             </div>
 

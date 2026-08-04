@@ -11,9 +11,9 @@ export default function SettingsAdminClient() {
   const [successMsg, setSuccessMsg] = useState(false);
 
   const [formData, setFormData] = useState({
-    store_phone: '+91 98765 43210',
-    whatsapp_number: '919876543210',
-    store_address: 'Shop no 2, plot, AURA (The Beginning), Sri Ram Tiles Industries Compound, opposite Balmukund Prime, GIDC, Dahegam, Gujarat 382305',
+    store_phone: '+91 88660 77505',
+    whatsapp_number: '918866077505',
+    store_address: 'Shop no 2, plot, Akshay Khanna's Store for only Men's, Sri Ram Tiles Industries Compound, opposite Balmukund Prime, GIDC, Dahegam, Gujarat 382305',
     hero_headline: 'Elegance Emerges from Darkness',
     hero_subtext: 'Discover bespoke tailoring, royal silk sherwanis, obsidian bandhgalas, and modern luxury apparel.',
     hero_media_url: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1920&auto=format&fit=crop',
@@ -36,8 +36,8 @@ export default function SettingsAdminClient() {
         const data = await fetchApi('/settings');
         if (data) {
           setFormData({
-            store_phone: data.store_phone || '+91 98765 43210',
-            whatsapp_number: data.whatsapp_number || '919876543210',
+            store_phone: data.store_phone || '+91 88660 77505',
+            whatsapp_number: data.whatsapp_number || '918866077505',
             store_address: data.store_address || '',
             hero_headline: data.hero_headline || '',
             hero_subtext: data.hero_subtext || '',

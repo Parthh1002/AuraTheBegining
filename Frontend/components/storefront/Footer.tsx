@@ -67,7 +67,7 @@ export default function Footer() {
                 <InstagramIcon className="w-4 h-4" />
               </a>
               <a
-                href="https://wa.me/919876543210"
+                href="https://wa.me/918866077505"
                 target="_blank"
                 rel="noreferrer"
                 className="w-8 h-8 rounded-full border border-aura-line flex items-center justify-center text-aura-cream hover:border-aura-gold hover:text-aura-gold transition-colors"
@@ -105,15 +105,15 @@ export default function Footer() {
             <div className="space-y-2 text-xs">
               <p className="flex items-start gap-2 text-aura-cream/90">
                 <MapPin className="w-4 h-4 text-aura-gold shrink-0 mt-0.5" />
-                <span>Shop no 2, plot, AURA (The Beginning), Sri Ram Tiles Compound, opp. Balmukund Prime, GIDC, Dahegam, Gujarat 382305</span>
+                <span>Shop no 2, plot, Akshay Khanna's Store for only Men's, Sri Ram Tiles Compound, opp. Balmukund Prime, GIDC, Dahegam, Gujarat 382305</span>
               </p>
               <p className="flex items-center gap-2 text-aura-cream/90">
                 <Phone className="w-4 h-4 text-aura-gold shrink-0" />
-                <span>+91 98765 43210</span>
+                <span>+91 88660 77505</span>
               </p>
               <p className="flex items-center gap-2 text-aura-cream/90">
                 <Mail className="w-4 h-4 text-aura-gold shrink-0" />
-                <span>contact@auramenswear.com</span>
+                <span>11a21278parth@gmail.com</span>
               </p>
             </div>
           </div>
@@ -153,7 +153,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-aura-muted">
-          <p>© {new Date().getFullYear()} AURA (The Beginning) MENS WEAR. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Akshay Khanna's Store for only Men's. All rights reserved.</p>
           <div className="flex space-x-6 mt-4 sm:mt-0">
             <Link href="/admin/login" className="hover:text-aura-gold transition-colors">Admin Portal</Link>
             <Link href="/visit-us" className="hover:text-aura-gold transition-colors">Store Map</Link>

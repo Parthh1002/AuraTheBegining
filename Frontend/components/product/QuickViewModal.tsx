@@ -107,7 +107,7 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
     setIsLogging(true);
 
     const waUrl = buildProductWhatsAppUrl({
-      whatsappNumber: '919876543210',
+      whatsappNumber: '918866077505',
       productName: product.name,
       size: selectedSize,
       sku: product.sku || undefined,

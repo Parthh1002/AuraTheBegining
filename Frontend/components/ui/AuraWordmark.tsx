@@ -46,30 +46,26 @@ export default function AuraWordmark({
       >
         {/* AURA wordmark */}
         <span
-          className={`font-serif font-bold uppercase ${
+          className={`font-serif font-bold uppercase whitespace-nowrap ${
             isLarge
-              ? 'text-5xl sm:text-7xl md:text-8xl tracking-[0.22em] text-aura-ink'
+              ? 'text-3xl sm:text-5xl md:text-6xl tracking-[0.05em] text-aura-ink'
               : isMedium
-              ? 'text-[22px] sm:text-[26px] tracking-[0.22em] text-aura-ink group-hover:text-aura-gold transition-colors duration-200'
-              : 'text-[18px] sm:text-[20px] tracking-[0.22em] text-aura-ink group-hover:text-aura-gold transition-colors duration-200'
+              ? 'text-[16px] sm:text-[18px] tracking-[0.05em] text-aura-ink group-hover:text-aura-gold transition-colors duration-200'
+              : 'text-[14px] sm:text-[16px] tracking-[0.05em] text-aura-ink group-hover:text-aura-gold transition-colors duration-200'
           }`}
-        >
-          AURA
-        </span>
+        >AKSHAY KHANNA'S</span>
 
         {/* THE BEGINNING tagline */}
         <span
-          className={`font-sans font-semibold uppercase ${
+          className={`font-sans font-semibold uppercase whitespace-nowrap ${
             isLarge
-              ? 'text-[11px] sm:text-sm tracking-[0.4em] text-aura-gold mt-2'
+              ? 'text-[10px] sm:text-xs tracking-[0.1em] text-aura-gold mt-1'
               : isMedium
-              ? 'text-[8px] sm:text-[9.5px] tracking-[0.3em] text-aura-gold mt-0.5'
-              : 'text-[7.5px] tracking-[0.28em] text-aura-gold'
+              ? 'text-[7px] sm:text-[8px] tracking-[0.1em] text-aura-gold mt-0.5'
+              : 'text-[6px] tracking-[0.1em] text-aura-gold'
           }`}
           style={{ color: 'var(--aura-gold-on-surface, #B8891E)' }}
-        >
-          THE BEGINNING
-        </span>
+        >STORE FOR ONLY MEN'S</span>
       </div>
     </div>
   );

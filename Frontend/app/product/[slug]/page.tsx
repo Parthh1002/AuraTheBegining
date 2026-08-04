@@ -40,7 +40,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   return (
     <ProductDetailClient
       product={formattedProduct}
-      whatsappNumber={settings?.whatsapp_number || '919876543210'}
+      whatsappNumber={settings?.whatsapp_number || '918866077505'}
       relatedProducts={formattedRelated}
     />
   );

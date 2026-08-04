@@ -26,15 +26,15 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'AURA (The Beginning) — Premium Men\'s Wear | Dahegam, Gujarat',
+  title: 'Akshay Khanna's Store for only Men's — Premium Men\'s Wear | Dahegam, Gujarat',
   description: 'Bespoke tailoring, silk sherwanis, obsidian bandhgalas, double-breasted suits, and luxury linen. Located at GIDC, Dahegam, Gujarat.',
   keywords: ['Aura mens wear', 'Dahegam suit store', 'Groom sherwani Dahegam', 'Bespoke suits Gujarat', 'Luxury mens fashion Dahegam'],
   authors: [{ name: 'AURA Mens Wear' }],
   openGraph: {
-    title: 'AURA (The Beginning) — Premium Men\'s Wear',
+    title: 'Akshay Khanna's Store for only Men's — Premium Men\'s Wear',
     description: 'Bespoke suits, tuxedos, and wedding ethnic wear. Dahegam, Gujarat.',
     url: 'https://auramenswear.com',
-    siteName: 'AURA (The Beginning)',
+    siteName: 'Akshay Khanna's Store for only Men's',
     locale: 'en_IN',
     type: 'website',
   },

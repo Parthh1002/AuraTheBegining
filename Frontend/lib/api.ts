@@ -51,7 +51,7 @@ export async function fetchApi<T = any>(endpoint: string, options: RequestInit =
     if (endpoint.includes('/enquiries')) {
       return {
         enquiries: [
-          { id: '1', name: 'Rahul Desai', phone: '9876543210', source: 'whatsapp', status: 'new', message: 'Hi, I need a suit for my wedding.', created_at: new Date().toISOString() },
+          { id: '1', name: 'Rahul Desai', phone: '8866077505', source: 'whatsapp', status: 'new', message: 'Hi, I need a suit for my wedding.', created_at: new Date().toISOString() },
           { id: '2', name: 'Aman Patel', email: 'aman@test.com', source: 'website', status: 'contacted', message: 'Do you have size 42?', created_at: new Date(Date.now() - 3600000).toISOString() },
           { id: '3', name: 'Suresh Kumar', phone: '9998887770', source: 'instagram', status: 'resolved', message: 'Pricing for bandhgala?', created_at: new Date(Date.now() - 7200000).toISOString() }
         ],

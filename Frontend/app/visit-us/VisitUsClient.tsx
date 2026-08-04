@@ -71,7 +71,7 @@ export default function VisitUsClient({
   };
 
   const whatsappUrl = buildGeneralWhatsAppUrl(whatsappNumber);
-  // Exact Google Maps Pinpoint Highlight for AURA (The beginning) MENS WEAR (23.16286593494573, 72.80827951499718)
+  // Exact Google Maps Pinpoint Highlight for Akshay Khanna's Store for only Men's (23.16286593494573, 72.80827951499718)
   const mapEmbedUrl = `https://maps.google.com/maps?q=AURA%20(The%20beginning)%20MENS%20WEAR,%20Dahegam,%20Gujarat&t=k&hl=en&z=20&output=embed`;
   const directionsUrl = `https://www.google.com/maps/place/AURA+(The+beginning)+MENS+WEAR/@23.16286593494573,72.80827951499718,19z`;
 
@@ -79,7 +79,7 @@ export default function VisitUsClient({
     <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-16 py-12 space-y-16">
       <div className="text-center max-w-2xl mx-auto space-y-3">
         <span className="text-xs font-sans tracking-[0.3em] text-aura-gold uppercase font-bold">BOUTIQUE STORE & LOCATION</span>
-        <h1 className="font-serif text-4xl sm:text-5xl text-aura-cream font-bold">Visit AURA (The Beginning)</h1>
+        <h1 className="font-serif text-4xl sm:text-5xl text-aura-cream font-bold">Visit Akshay Khanna's Store for only Men's</h1>
         <p className="text-xs text-aura-muted leading-relaxed">
           Experience our complete catalog, custom fits, and personal styling sessions at GIDC Dahegam.
         </p>
@@ -90,7 +90,7 @@ export default function VisitUsClient({
           <div className="bg-aura-panel border border-aura-gold/30 rounded-xl overflow-hidden shadow-[0_0_40px_rgba(212,160,42,0.15)] h-[500px] relative group transition-all duration-500 hover:shadow-[0_0_50px_rgba(212,160,42,0.25)]">
             {/* Fully Interactive Map with Prominent Native Pin */}
             <iframe
-              title="AURA (The Beginning) Exact Location"
+              title="Akshay Khanna's Store for only Men's Exact Location"
               src="https://maps.google.com/maps?q=23.16286593494573,72.80827951499718&t=k&hl=en&z=20&output=embed"
               width="100%"
               height="100%"
@@ -218,7 +218,7 @@ export default function VisitUsClient({
                 <label className="text-xs font-medium text-aura-cream">Phone Number *</label>
                 <input
                   type="text"
-                  placeholder="+91 98765 43210"
+                  placeholder="+91 88660 77505"
                   {...register('phone')}
                   className="w-full bg-aura-elevated border border-aura-line text-aura-cream px-4 py-3 rounded text-xs focus:outline-none focus:border-aura-gold"
                 />

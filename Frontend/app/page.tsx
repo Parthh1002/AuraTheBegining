@@ -39,8 +39,8 @@ export default async function HomePage() {
   /* ── Derived values ────────────────────────────── */
   const heroHeadline  = settings?.hero_headline  || 'Elegance Emerges from Darkness';
   const heroSubtext   = settings?.hero_subtext   || 'Discover bespoke tailoring, royal silk sherwanis, obsidian bandhgalas, and modern luxury apparel.';
-  const storeAddress  = settings?.store_address  || 'Shop no 2, AURA (The Beginning), Sri Ram Tiles Industries Compound, opposite Balmukund Prime, GIDC, Dahegam, Gujarat 382305';
-  const whatsappNum   = settings?.whatsapp_number|| '919876543210';
+  const storeAddress  = settings?.store_address  || 'Shop no 2, Akshay Khanna's Store for only Men's, Sri Ram Tiles Industries Compound, opposite Balmukund Prime, GIDC, Dahegam, Gujarat 382305';
+  const whatsappNum   = settings?.whatsapp_number|| '918866077505';
   const heroMediaUrl  = settings?.hero_media_url || 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1920&auto=format&fit=crop';
 
   const formattedArrivals = (newArrivals || []).map((p: any) => ({
@@ -306,7 +306,7 @@ export default async function HomePage() {
                     Boutique Store
                   </p>
                   <h2 className="font-serif text-2xl sm:text-3xl font-bold" style={{ color: 'var(--aura-ink)' }}>
-                    Visit AURA (The Beginning)
+                    Visit Akshay Khanna's Store for only Men's
                   </h2>
                 </div>
                 <p className="text-sm leading-relaxed" style={{ color: 'var(--aura-subink)' }}>

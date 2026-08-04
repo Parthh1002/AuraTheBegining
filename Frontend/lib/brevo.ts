@@ -13,7 +13,7 @@ export interface SendEmailPayload {
 export async function sendTransactionalEmail(payload: SendEmailPayload) {
   const apiKey = process.env.BREVO_API_KEY;
   const senderEmail = process.env.BREVO_SENDER_EMAIL || 'info@auramenswear.com';
-  const senderName = 'AURA (The Beginning)';
+  const senderName = 'Akshay Khanna's Store for only Men's';
 
   if (!apiKey) {
     console.warn('BREVO_API_KEY is not configured. Email notification skipped.');
@@ -57,13 +57,13 @@ export async function sendCustomerAutoReply(customerEmail: string, customerName:
   const htmlContent = `
     <div style="font-family: Arial, sans-serif; background-color: #0A0A0C; color: #F5F1E8; padding: 40px 20px;">
       <div style="max-width: 600px; margin: 0 auto; background-color: #151517; border: 1px solid rgba(212,160,42,0.2); padding: 30px; border-radius: 8px;">
-        <h1 style="color: #D4A02A; font-size: 24px; margin-bottom: 10px; letter-spacing: 2px;">AURA — THE BEGINNING</h1>
+        <h1 style="color: #D4A02A; font-size: 24px; margin-bottom: 10px; letter-spacing: 2px;">Akshay Khanna's Store for only Men's</h1>
         <p style="color: #9C9894; font-size: 14px; margin-bottom: 20px;">Premium Men's Wear • GIDC Dahegam</p>
         <hr style="border: 0; border-top: 1px solid rgba(212,160,42,0.2); margin-bottom: 25px;" />
         
         <p style="font-size: 16px; line-height: 1.6;">Dear <strong>${customerName || 'Valued Customer'}</strong>,</p>
         <p style="font-size: 15px; color: #9C9894; line-height: 1.6;">
-          Thank you for reaching out to AURA (The Beginning). We have received your inquiry and our team will get back to you shortly.
+          Thank you for reaching out to Akshay Khanna's Store for only Men's. We have received your inquiry and our team will get back to you shortly.
         </p>
         <p style="font-size: 15px; color: #9C9894; line-height: 1.6;">
           You can also visit our boutique store directly or contact us on WhatsApp for instant bespoke consultations.
@@ -72,12 +72,12 @@ export async function sendCustomerAutoReply(customerEmail: string, customerName:
         <div style="margin-top: 30px; padding: 20px; background-color: #1D1D20; border-left: 3px solid #D4A02A;">
           <p style="margin: 0; color: #D4A02A; font-weight: bold;">Store Location:</p>
           <p style="margin: 5px 0 0 0; color: #F5F1E8; font-size: 14px;">
-            Shop no 2, plot, AURA (The Beginning), Sri Ram Tiles Industries Compound, opposite Balmukund Prime, GIDC, Dahegam, Gujarat 382305
+            Shop no 2, plot, Akshay Khanna's Store for only Men's, Sri Ram Tiles Industries Compound, opposite Balmukund Prime, GIDC, Dahegam, Gujarat 382305
           </p>
         </div>
 
         <p style="margin-top: 30px; font-size: 13px; color: #9C9894; text-align: center;">
-          © ${new Date().getFullYear()} AURA (The Beginning) MENS WEAR. All rights reserved.
+          © ${new Date().getFullYear()} Akshay Khanna's Store for only Men's. All rights reserved.
         </p>
       </div>
     </div>
@@ -86,7 +86,7 @@ export async function sendCustomerAutoReply(customerEmail: string, customerName:
   return sendTransactionalEmail({
     toEmail: customerEmail,
     toName: customerName,
-    subject: 'Thank you for contacting AURA (The Beginning)',
+    subject: 'Thank you for contacting Akshay Khanna's Store for only Men's',
     htmlContent,
   });
 }
@@ -146,7 +146,7 @@ export async function sendNewsletterConfirmation(email: string, confirmUrl: stri
   const htmlContent = `
     <div style="font-family: Arial, sans-serif; background-color: #0A0A0C; color: #F5F1E8; padding: 40px 20px;">
       <div style="max-width: 600px; margin: 0 auto; background-color: #151517; border: 1px solid rgba(212,160,42,0.2); padding: 30px; border-radius: 8px; text-align: center;">
-        <h1 style="color: #D4A02A; font-size: 24px; letter-spacing: 2px;">AURA — THE BEGINNING</h1>
+        <h1 style="color: #D4A02A; font-size: 24px; letter-spacing: 2px;">Akshay Khanna's Store for only Men's</h1>
         <p style="color: #9C9894; font-size: 14px;">Confirm Your Subscription</p>
         <hr style="border: 0; border-top: 1px solid rgba(212,160,42,0.2); margin: 25px 0;" />
         

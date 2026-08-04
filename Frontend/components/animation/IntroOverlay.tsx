@@ -303,10 +303,11 @@ export default function IntroOverlay() {
                 color: '#FFFFFF',
               }}
             >
-              <span className="intro-letter inline-block">A</span>
-              <span className="intro-letter inline-block">U</span>
-              <span className="intro-letter inline-block">R</span>
-              <span className="intro-letter inline-block">A</span>
+              {"AKSHAY KHANNA'S".split('').map((char, i) => (
+                <span key={i} className="intro-letter inline-block">
+                  {char === ' ' ? '\u00A0' : char}
+                </span>
+              ))}
             </h1>
 
             {/* ── GOLD DIVIDER ── */}
@@ -320,13 +321,13 @@ export default function IntroOverlay() {
               }}
             />
 
-            {/* ── "THE BEGINNING" — gold ── */}
+            {/* ── "STORE FOR ONLY MEN'S" — gold ── */}
             <p
               ref={taglineRef}
               className="font-sans font-black uppercase"
               style={{ fontSize: 11, letterSpacing: '0.1em', color: '#D4A02A' }}
             >
-              THE BEGINNING
+              STORE FOR ONLY MEN'S
             </p>
 
             {/* ── SUBTITLE — white/50% ── */}
