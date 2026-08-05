@@ -50,10 +50,10 @@ export default function Footer() {
           {/* Brand Info */}
           <div className="space-y-4 md:col-span-1">
             <Link href="/" className="inline-block">
-              <span className="font-serif text-2xl font-bold tracking-[0.25em] text-aura-cream">AURA</span>
-              <span className="block text-[9px] tracking-[0.3em] text-aura-gold uppercase font-semibold">THE BEGINNING</span>
+              <span className="font-serif text-sm font-bold tracking-[0.05em] text-aura-cream whitespace-nowrap">AKSHAY KHANNA'S</span>
+              <span className="block text-[7px] tracking-[0.1em] text-aura-gold uppercase font-semibold whitespace-nowrap">STORE FOR ONLY MEN'S</span>
             </Link>
-            <p className="text-xs leading-relaxed text-aura-muted">
+            <p className="text-xs leading-relaxed text-aura-muted pt-2">
               Where light emerges from darkness. Premium men clothing boutique in Dahegam offering bespoke bandhgalas, tuxedos, silk sherwanis, and casual luxury linen.
             </p>
             <div className="flex space-x-4 pt-2">

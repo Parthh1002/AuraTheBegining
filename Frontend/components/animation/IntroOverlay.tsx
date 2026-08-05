@@ -297,8 +297,8 @@ export default function IntroOverlay() {
               ref={wordmarkRef}
               className="font-serif font-bold uppercase flex items-center"
               style={{
-                fontSize: 'clamp(52px, 10vw, 88px)',
-                letterSpacing: '0.22em',
+                fontSize: 'clamp(20px, 5vw, 64px)',
+                letterSpacing: '0.05em',
                 lineHeight: 1,
                 color: '#FFFFFF',
               }}
